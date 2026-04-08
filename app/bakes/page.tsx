@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
-import { Footer } from '@/components';
-import { Header } from '@/components/Header';
-import {
-    BakesCatalog,
-    BakesCtaBanner,
-    BakesShopHero,
-} from '@/components/bakes';
+import { Footer, Header } from '@/components/layout';
+import { BakesCatalog, BakesCtaBanner, BakesShopHero } from '@/components/bakes';
 import {
     BAKES_FILTER_PILLS,
     BAKES_HERO,

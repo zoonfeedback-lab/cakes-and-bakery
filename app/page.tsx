@@ -1,67 +1,47 @@
 'use client';
 
-import {
-  Header,
-  HeroSection,
-  FeaturedCategories,
-  GallerySection,
-  JourneySection,
-  TestimonialsSection,
-  CTASection,
-  Footer,
-} from '@/components';
-import {
-  FEATURED_CAKES,
-  GALLERY_ITEMS,
-  JOURNEY_STEPS,
-  TESTIMONIALS,
-} from '@/constants';
 import { useCallback } from 'react';
+import { Footer, Header } from '@/components/layout';
+import {
+    CTASection,
+    FeaturedCategories,
+    GallerySection,
+    HeroSection,
+    JourneySection,
+    TestimonialsSection,
+} from '@/components/home';
+import { FEATURED_CAKES, GALLERY_ITEMS, JOURNEY_STEPS, TESTIMONIALS } from '@/constants/home';
 
 export default function HomePage() {
-  const handleOrderClick = useCallback(() => {
-    // TODO: Implement order flow / modal
-    console.log('Order clicked');
-  }, []);
+    const handleOrderClick = useCallback(() => {
+        // TODO: Implement order flow / modal
+        console.log('Order clicked');
+    }, []);
 
-  const handleViewAll = useCallback(() => {
-    // TODO: Navigate to gallery page
-    console.log('View all gallery clicked');
-  }, []);
+    const handleViewAll = useCallback(() => {
+        // TODO: Navigate to gallery page
+        console.log('View all gallery clicked');
+    }, []);
 
-  const handleCTAClick = useCallback(() => {
-    // TODO: Navigate to customization flow
-    console.log('CTA clicked');
-  }, []);
+    const handleCTAClick = useCallback(() => {
+        // TODO: Navigate to customization flow
+        console.log('CTA clicked');
+    }, []);
 
-  return (
-    <div className="flex flex-col min-h-screen bg-white">
-      {/* Header - Fixed/Sticky */}
-      <Header />
+    return (
+        <div className="flex min-h-screen flex-col bg-white">
+            <Header />
 
-      {/* Main Content */}
-      <main className="flex flex-col flex-grow">
-        {/* Hero Section */}
-        <HeroSection onOrderClick={handleOrderClick} />
+            <main className="flex flex-grow flex-col">
+                <HeroSection onOrderClick={handleOrderClick} />
+                <FeaturedCategories items={FEATURED_CAKES} />
+                <GallerySection items={GALLERY_ITEMS} onViewAll={handleViewAll} />
+                <JourneySection steps={JOURNEY_STEPS} />
+                <TestimonialsSection items={TESTIMONIALS} />
+                <CTASection onCTAClick={handleCTAClick} />
+            </main>
 
-        {/* Featured Categories */}
-        <FeaturedCategories items={FEATURED_CAKES} />
-
-        {/* Gallery Section */}
-        <GallerySection items={GALLERY_ITEMS} onViewAll={handleViewAll} />
-
-        {/* Journey Section */}
-        <JourneySection steps={JOURNEY_STEPS} />
-
-        {/* Testimonials Section */}
-        <TestimonialsSection items={TESTIMONIALS} />
-
-        {/* CTA Section */}
-        <CTASection onCTAClick={handleCTAClick} />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
+            <Footer />
+        </div>
+    );
 }
