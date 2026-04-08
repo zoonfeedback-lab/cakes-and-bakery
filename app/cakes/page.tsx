@@ -133,6 +133,7 @@ const cakes: CakeItem[] = [
 ];
 
 export default function CakesPage() {
+  const formatPrice = (price: number) => `PKR ${price.toLocaleString()}`;
   const maxPrice = useMemo(() => Math.max(...cakes.map((cake) => cake.price)), []);
 
   const [activePill, setActivePill] = useState('all');
@@ -211,22 +212,11 @@ export default function CakesPage() {
   }
 
   return (
-    <div className="bg-[#f5f3ef] text-[#2d242a]">
-      <div className="mx-auto max-w-[1200px] px-5 pb-12 pt-8 md:px-8 lg:px-10">
-        <header className="mb-10 flex flex-col items-center gap-4">
-          <p className="text-center font-serif text-4xl text-[#4a2f40]">Central Cakes</p>
-          <nav className="flex items-center gap-7 text-sm text-[#6f5f66]">
-            <a className="border-b border-[#4a2f40] pb-1 text-[#4a2f40]" href="#">
-              Cakes
-            </a>
-            <a className="hover:text-[#4a2f40]" href="/bakes">
-              Bakes
-            </a>
-            <a className="hover:text-[#4a2f40]" href="#">
-              Birthdays
-            </a>
-          </nav>
-        </header>
+    <div className="flex min-h-screen flex-col bg-[#f5f3ef] text-[#2d242a]">
+      <Header />
+
+      <main className="flex-1">
+        <div className="mx-auto max-w-[1200px] px-5 pb-12 pt-8 md:px-8 lg:px-10">
 
         <section className="mb-8 grid gap-4 lg:grid-cols-[1.45fr_0.55fr]">
           <article className="relative overflow-hidden rounded-[34px] bg-[#e8c7d5] p-7 md:p-10">
@@ -320,8 +310,8 @@ export default function CakesPage() {
                 className="mb-3 h-1.5 w-full cursor-pointer accent-[#6f4c62]"
               />
               <div className="flex justify-between text-sm text-[#776b71]">
-                <span>$20</span>
-                <span>${priceCap}+</span>
+                <span>PKR 20</span>
+                <span>{formatPrice(priceCap)}+</span>
               </div>
             </div>
 
@@ -374,7 +364,7 @@ export default function CakesPage() {
                 </div>
                 <div className="mb-2 flex items-start justify-between gap-3">
                   <h3 className="text-4xl font-semibold leading-tight text-[#2e222a]">{cake.name}</h3>
-                  <span className="pt-1 text-sm text-[#473c43]">${cake.price}</span>
+                  <span className="pt-1 text-sm text-[#473c43]">{formatPrice(cake.price)}</span>
                 </div>
                 <p className="mb-5 min-h-[68px] text-sm leading-relaxed text-[#6b5c65]">{cake.description}</p>
                 <button
