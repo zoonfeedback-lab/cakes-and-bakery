@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useDeferredValue, useMemo, useState } from 'react';
-import { Footer, Header } from '@/components/layout';
+import { Footer } from '@/components';
 
 type CakeItem = {
   id: string;
@@ -411,9 +411,7 @@ export default function CakesPage() {
             Design Custom Cake
           </button>
         </section>
-        </div>
-
-      </main>
+      </div>
 
       <Footer />
     </div>
