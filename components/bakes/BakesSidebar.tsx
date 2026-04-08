@@ -37,8 +37,8 @@ export const BakesSidebar = ({
                             className="h-2 w-full cursor-pointer accent-[var(--primary)]"
                         />
                         <div className="mt-3 flex justify-between text-xs uppercase tracking-[0.16em] text-text-soft">
-                            <span>$10</span>
-                            <span>${priceCap}</span>
+                            <span>PKR 10</span>
+                            <span>PKR {priceCap.toLocaleString()}</span>
                         </div>
                     </div>
                 </div>

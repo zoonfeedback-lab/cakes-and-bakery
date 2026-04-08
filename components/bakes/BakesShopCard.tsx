@@ -6,6 +6,8 @@ type BakesShopCardProps = Readonly<{
 }>;
 
 export const BakesShopCard = ({ item }: BakesShopCardProps) => {
+    const formattedPrice = item.priceLabel ?? `PKR ${item.price.toLocaleString()}`;
+
     return (
         <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_16px_38px_rgba(109,80,96,0.06)]">
             <div className="relative aspect-[0.92] w-full overflow-hidden">
@@ -23,7 +25,7 @@ export const BakesShopCard = ({ item }: BakesShopCardProps) => {
                         {item.name}
                     </h3>
                     <span className="pt-2 text-sm uppercase tracking-[0.16em] text-primary">
-                        {item.priceLabel ?? `$${item.price}`}
+                        {formattedPrice}
                     </span>
                 </div>
 

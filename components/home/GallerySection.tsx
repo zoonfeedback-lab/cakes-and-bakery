@@ -7,6 +7,8 @@ type GalleryProps = Readonly<{
 }>;
 
 export const GallerySection = ({ items, onViewAll }: GalleryProps) => {
+    const formatPrice = (price: number) => `PKR ${price.toLocaleString()}`;
+
     return (
         <section className="bg-surface py-20">
             <div className="mx-auto max-w-7xl px-4">
@@ -37,7 +39,7 @@ export const GallerySection = ({ items, onViewAll }: GalleryProps) => {
                                         {item.name}
                                     </h3>
                                     <span className="text-lg font-serif font-bold text-text-muted">
-                                        ${item.price}
+                                        {formatPrice(item.price)}
                                     </span>
                                 </div>
 

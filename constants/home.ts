@@ -3,54 +3,54 @@ import { CakeProduct, Testimonial, JourneyStep } from '@/types';
 export const FEATURED_CAKES: CakeProduct[] = [
     {
         id: '1',
-        name: 'Signature Cakes',
+        name: 'Mehfil Signature',
         category: 'Signature',
         price: 45,
         image: '/images/signature-cake.png',
-        description: 'Artisan cakes, delicious taste, and unforgettable birthdays',
+        description: 'Elegant custom cakes crafted for family gatherings, dholkis, and memorable celebrations',
     },
     {
         id: '2',
-        name: 'Daily Bakes',
+        name: 'Rozana Bakes',
         category: 'Daily',
         price: 35,
         image: '/images/daily-bakes.png',
-        description: 'Fresh baked goodies perfect for any occasion',
+        description: 'Freshly baked treats perfect for chai time, gifting, and everyday sweet cravings',
     },
     {
         id: '3',
-        name: 'Birthday Cakes',
+        name: 'Shaadi Aur Birthday',
         category: 'Birthday',
         price: 55,
         image: '/images/birthday-cake.png',
-        description: 'Make your celebration special with custom designs',
+        description: 'Celebrate birthdays and festive moments with joyful custom cake designs',
     },
 ];
 
 export const GALLERY_ITEMS: CakeProduct[] = [
     {
         id: 'g1',
-        name: 'Velvet Rose Boutique',
+        name: 'Gulabo Velvet',
         category: 'Premium',
         price: 89,
         image: '/images/velvet-rose.png',
-        description: 'Elegant white cake with premium decoration',
+        description: 'A graceful white celebration cake with floral styling and soft desi wedding charm',
     },
     {
         id: 'g2',
-        name: 'Salted Caramel Cloud',
+        name: 'Badami Caramel',
         category: 'Premium',
         price: 49,
         image: '/images/salted-caramel.png',
-        description: 'Smooth caramel layers with specialty flavoring',
+        description: 'Smooth caramel layers finished with a rich bakery touch and nutty warmth',
     },
     {
         id: 'g3',
-        name: 'Celestial Celebration',
+        name: 'Shehnai Celebration',
         category: 'Premium',
         price: 99,
         image: '/images/celestial.png',
-        description: 'Luxurious gold-accented celebration cake',
+        description: 'A luxurious gold-accented cake designed for weddings, engagements, and grand events',
     },
 ];
 

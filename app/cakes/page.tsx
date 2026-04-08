@@ -132,6 +132,7 @@ const cakes: CakeItem[] = [
 ];
 
 export default function CakesPage() {
+  const formatPrice = (price: number) => `PKR ${price.toLocaleString()}`;
   const maxPrice = useMemo(() => Math.max(...cakes.map((cake) => cake.price)), []);
 
   const [activePill, setActivePill] = useState('all');
@@ -319,8 +320,8 @@ export default function CakesPage() {
                 className="mb-3 h-1.5 w-full cursor-pointer accent-[#6f4c62]"
               />
               <div className="flex justify-between text-sm text-[#776b71]">
-                <span>$20</span>
-                <span>${priceCap}+</span>
+                <span>PKR 20</span>
+                <span>{formatPrice(priceCap)}+</span>
               </div>
             </div>
 
@@ -373,7 +374,7 @@ export default function CakesPage() {
                 </div>
                 <div className="mb-2 flex items-start justify-between gap-3">
                   <h3 className="text-4xl font-semibold leading-tight text-[#2e222a]">{cake.name}</h3>
-                  <span className="pt-1 text-sm text-[#473c43]">${cake.price}</span>
+                  <span className="pt-1 text-sm text-[#473c43]">{formatPrice(cake.price)}</span>
                 </div>
                 <p className="mb-5 min-h-[68px] text-sm leading-relaxed text-[#6b5c65]">{cake.description}</p>
                 <button
