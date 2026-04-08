@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useDeferredValue, useMemo, useState } from 'react';
+import { Footer, Header } from '@/components/layout';
 
 type CakeItem = {
   id: string;
@@ -211,22 +212,11 @@ export default function CakesPage() {
   }
 
   return (
-    <div className="bg-[#f5f3ef] text-[#2d242a]">
-      <div className="mx-auto max-w-[1200px] px-5 pb-12 pt-8 md:px-8 lg:px-10">
-        <header className="mb-10 flex flex-col items-center gap-4">
-          <p className="text-center font-serif text-4xl text-[#4a2f40]">Central Cakes</p>
-          <nav className="flex items-center gap-7 text-sm text-[#6f5f66]">
-            <a className="border-b border-[#4a2f40] pb-1 text-[#4a2f40]" href="#">
-              Cakes
-            </a>
-            <a className="hover:text-[#4a2f40]" href="/bakes">
-              Bakes
-            </a>
-            <a className="hover:text-[#4a2f40]" href="#">
-              Birthdays
-            </a>
-          </nav>
-        </header>
+    <div className="flex min-h-screen flex-col bg-[#f5f3ef] text-[#2d242a]">
+      <Header />
+
+      <main className="flex-1">
+        <div className="mx-auto max-w-[1200px] px-5 pb-12 pt-8 md:px-8 lg:px-10">
 
         <section className="mb-8 grid gap-4 lg:grid-cols-[1.45fr_0.55fr]">
           <article className="relative overflow-hidden rounded-[34px] bg-[#e8c7d5] p-7 md:p-10">
@@ -421,47 +411,11 @@ export default function CakesPage() {
             Design Custom Cake
           </button>
         </section>
-      </div>
-
-      <footer className="mt-10 bg-[#ebe8e3]">
-        <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-11 md:grid-cols-4 md:px-8 lg:px-10">
-          <div>
-            <h3 className="mb-3 text-3xl font-semibold text-[#3f2d38]">Central Cakes</h3>
-            <p className="text-sm leading-relaxed text-[#6f646a]">
-              Artisan cakes crafted with passion in the heart of the flourished gallery. Elevating your celebrations
-              since 2012.
-            </p>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Explore</p>
-            <ul className="space-y-2 text-sm text-[#4f4249]">
-              <li>Our Story</li>
-              <li>Gallery</li>
-              <li>Workshops</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Support</p>
-            <ul className="space-y-2 text-sm text-[#4f4249]">
-              <li>Contact Us</li>
-              <li>Shipping Policy</li>
-              <li>Terms of Service</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Connect</p>
-            <div className="mb-4 flex gap-3 text-[#5d5157]">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">*</span>
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">+</span>
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">#</span>
-            </div>
-            <p className="text-xs text-[#7f747a]">2026 Central Cakes. Crafted for the Flourished Gallery.</p>
-          </div>
         </div>
-      </footer>
+
+      </main>
+
+      <Footer />
     </div>
   );
 }

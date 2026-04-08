@@ -84,19 +84,19 @@ export const JOURNEY_STEPS: JourneyStep[] = [
 export const TESTIMONIALS: Testimonial[] = [
     {
         id: 't1',
-        author: 'Robert Jones',
+        author: 'Ayesha Khan',
         content: 'The cake for my kids wedding was next in taste and exceeded my dreams. Don’t hesitate.',
         rating: 5,
     },
     {
         id: 't2',
-        author: 'Elena Wilson',
+        author: 'Hamza Sheikh',
         content: "The cake we planned for our daughter's engagement turned out better than we imagined.",
         rating: 5,
     },
     {
         id: 't3',
-        author: 'Marcus Anderson',
+        author: 'Maham Raza',
         content: 'The attention to detail is outstanding. Every celebration deserves their cakes. Highly recommend!',
         rating: 5,
     },
