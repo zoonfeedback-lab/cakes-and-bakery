@@ -8,42 +8,31 @@ type GalleryProps = Readonly<{
 
 export const GallerySection = ({ items, onViewAll }: GalleryProps) => {
     return (
-        <section className="py-20 bg-surface">
-            <div className="max-w-7xl mx-auto px-4">
-                
-                <div className="flex flex-col md:flex-row items-end justify-between mb-10 gap-4">
-                    <div>
-                        <h2 className="section-title mb-2 text-3xl">
-                            The Gallery Favorites
-                        </h2>
-                        <p className="body-copy text-xs uppercase tracking-[0.1em]">
-                            Our most requested creations for your special moments
-                        </p>
-                    </div>
-                    <button
-                        onClick={onViewAll}
-                        className="text-primary hover:text-primary-light font-medium text-sm flex items-center gap-2 uppercase tracking-widest transition-colors"
-                    >
-                        View Collection →
-                    </button>
+        <section className="bg-surface py-20">
+            <div className="mx-auto max-w-7xl px-4">
+                <div className="mb-12 flex flex-col items-center text-center">
+                    <h2 className="section-title mb-3 text-3xl md:text-5xl">
+                        The Gallery Favorites
+                    </h2>
+                    <p className="body-copy text-xs uppercase tracking-[0.18em]">
+                        Our most requested creations for your special moments
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     {items.map((item) => (
                         <div key={item.id} className="group flex flex-col">
-                            {/* Image Box */}
-                            <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden mb-6 bg-gray-900 shadow-lg">
-                                <Image 
-                                    src={item.image} 
-                                    alt={item.name} 
-                                    fill 
+                            <div className="relative mb-6 aspect-square w-full overflow-hidden rounded-[2rem] bg-gray-900 shadow-lg">
+                                <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                             </div>
 
-                            {/* Content */}
-                            <div className="flex-1 flex flex-col px-2">
-                                <div className="flex justify-between items-start mb-1">
+                            <div className="flex flex-1 flex-col px-2">
+                                <div className="mb-1 flex items-start justify-between gap-4">
                                     <h3 className="text-xl font-serif font-bold text-text">
                                         {item.name}
                                     </h3>
@@ -51,17 +40,17 @@ export const GallerySection = ({ items, onViewAll }: GalleryProps) => {
                                         ${item.price}
                                     </span>
                                 </div>
-                                
+
                                 <p className="body-copy mb-3 line-clamp-1 text-sm">
                                     {item.description}
                                 </p>
-                                
-                                <span className="text-[10px] font-bold text-primary uppercase tracking-widest mb-6 block">
+
+                                <span className="mb-6 block text-[10px] font-bold uppercase tracking-widest text-primary">
                                     {item.category}
                                 </span>
 
                                 <button className="mt-auto flex w-full items-center justify-center gap-2 rounded-full bg-grayMuted py-3.5 text-sm font-medium text-text transition-colors hover:bg-surface-muted">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
                                     Add to cart
@@ -69,6 +58,15 @@ export const GallerySection = ({ items, onViewAll }: GalleryProps) => {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                <div className="mt-10 flex justify-center">
+                    <button
+                        onClick={onViewAll}
+                        className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.24em] text-primary transition-colors hover:text-primary-light"
+                    >
+                        View Collection <span aria-hidden="true">-&gt;</span>
+                    </button>
                 </div>
             </div>
         </section>
