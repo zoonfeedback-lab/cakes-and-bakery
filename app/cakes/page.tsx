@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useDeferredValue, useMemo, useState } from 'react';
+import { Footer } from '@/components';
 
 type CakeItem = {
   id: string;
@@ -422,45 +423,7 @@ export default function CakesPage() {
         </section>
       </div>
 
-      <footer className="mt-10 bg-[#ebe8e3]">
-        <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-11 md:grid-cols-4 md:px-8 lg:px-10">
-          <div>
-            <h3 className="mb-3 text-3xl font-semibold text-[#3f2d38]">Central Cakes</h3>
-            <p className="text-sm leading-relaxed text-[#6f646a]">
-              Artisan cakes crafted with passion in the heart of the flourished gallery. Elevating your celebrations
-              since 2012.
-            </p>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Explore</p>
-            <ul className="space-y-2 text-sm text-[#4f4249]">
-              <li>Our Story</li>
-              <li>Gallery</li>
-              <li>Workshops</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Support</p>
-            <ul className="space-y-2 text-sm text-[#4f4249]">
-              <li>Contact Us</li>
-              <li>Shipping Policy</li>
-              <li>Terms of Service</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-[#6c5f66]">Connect</p>
-            <div className="mb-4 flex gap-3 text-[#5d5157]">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">*</span>
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">+</span>
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-white">#</span>
-            </div>
-            <p className="text-xs text-[#7f747a]">2026 Central Cakes. Crafted for the Flourished Gallery.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
