@@ -44,6 +44,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         sizeOptions: ['6" Standard', '8" Celebration'],
         occasions: ['Birthday', 'Anniversary'],
         tags: ['Most Loved'],
+        dimensions: 'Standard Tier (Serves 12-15)',
     },
     {
         id: 'citrus-bloom',
@@ -54,6 +55,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         category: 'vanilla',
         sizeOptions: ['4" Bento Cake', '6" Standard'],
         occasions: ['Birthday', 'Graduation'],
+        dimensions: 'Standard Tier (Serves 8-10)',
     },
     {
         id: 'midnight-ganache',
@@ -65,6 +67,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         sizeOptions: ['6" Standard', '8" Celebration'],
         occasions: ['Wedding', 'Anniversary'],
         tags: ['Best Seller'],
+        dimensions: 'Double Tier (Serves 25-30)',
     },
     {
         id: 'summer-berry',
@@ -75,6 +78,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         category: 'vanilla',
         sizeOptions: ['4" Bento Cake', '6" Standard'],
         occasions: ['Birthday', 'Graduation'],
+        dimensions: 'Standard Tier (Serves 12-15)',
     },
     {
         id: 'ivory-orchid',
@@ -86,6 +90,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         sizeOptions: ['Tiered Artistry'],
         occasions: ['Wedding', 'Anniversary'],
         tags: ['Best Seller', 'Most Loved'],
+        dimensions: 'Three Tier (Serves 45-50)',
     },
     {
         id: 'caramel-drift',
@@ -96,6 +101,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         category: 'chocolate',
         sizeOptions: ['6" Standard', '8" Celebration'],
         occasions: ['Anniversary', 'Graduation'],
+        dimensions: 'Standard Tier (Serves 12-15)',
     },
     {
         id: 'pixel-party',
@@ -107,6 +113,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         sizeOptions: ['6" Standard', '8" Celebration'],
         occasions: ['Birthday', 'Graduation'],
         tags: ['Custom'],
+        dimensions: 'Double Tier (Serves 20-25)',
     },
     {
         id: 'gold-ribbon',
@@ -117,6 +124,7 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         category: 'wedding-cake',
         sizeOptions: ['8" Celebration', 'Tiered Artistry'],
         occasions: ['Wedding', 'Anniversary'],
+        dimensions: 'Two Tier (Serves 30-35)',
     },
     {
         id: 'crimson-frost',
@@ -127,5 +135,6 @@ export const CAKE_SHOP_ITEMS: CakeProduct[] = [
         category: 'red-velvet',
         sizeOptions: ['6" Standard', '8" Celebration'],
         occasions: ['Birthday', 'Wedding'],
+        dimensions: 'Standard Tier (Serves 12-15)',
     },
 ];

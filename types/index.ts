@@ -8,6 +8,7 @@ export interface CakeProduct {
     sizeOptions?: string[];
     occasions?: string[];
     tags?: string[];
+    dimensions?: string;
 }
 
 export interface Testimonial {
