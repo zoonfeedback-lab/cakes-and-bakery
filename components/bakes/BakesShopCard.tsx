@@ -1,5 +1,6 @@
 import type { BakeProduct } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type BakesShopCardProps = Readonly<{
     item: BakeProduct;
@@ -31,9 +32,11 @@ export const BakesShopCard = ({ item }: BakesShopCardProps) => {
 
                 <p className="body-copy min-h-[3.5rem] text-xs sm:min-h-[4.25rem] sm:text-sm">{item.description}</p>
 
-                <button className="mt-1 inline-flex w-full items-center justify-center rounded-full border border-primary bg-transparent px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:bg-primary hover:text-white sm:mt-2 sm:px-5 sm:py-3 sm:text-sm">
+                <Link 
+                    href={`/custom?bake=${item.id}`}
+                    className="mt-1 inline-flex w-full items-center justify-center rounded-full border border-primary bg-transparent px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:bg-primary hover:text-white sm:mt-2 sm:px-5 sm:py-3 sm:text-sm">
                     Customize
-                </button>
+                </Link>
             </div>
         </article>
     );
