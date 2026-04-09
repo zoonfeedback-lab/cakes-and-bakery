@@ -1,7 +1,7 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
 import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
@@ -64,13 +64,16 @@ const StudioContent = () => {
           currentItem: {
             id: bake.id,
             name: bake.name,
-            price: bake.price * 100, // Matching the price scale
+            price: bake.price * 100,
             weight: 'Standard Box',
             image: bake.image,
-          }
+            dimensions: bake.boxOptions?.[0] ?? 'Standard Box',
+          },
         };
       }
-    } else if (cakeId) {
+    }
+
+    if (cakeId) {
       const cake = CAKE_SHOP_ITEMS.find((c) => c.id === cakeId);
       if (cake) {
         return {
@@ -81,10 +84,12 @@ const StudioContent = () => {
             price: cake.price * 100,
             weight: '2.5KG',
             image: cake.image,
-          }
+            dimensions: cake.dimensions ?? DEFAULT_STUDIO_CAKE.dimensions,
+          },
         };
       }
     }
+
     return { isBake: false, currentItem: DEFAULT_STUDIO_CAKE };
   }, [cakeId, bakeId]);
 

@@ -73,7 +73,7 @@ export const BirthdaySidebar = () => {
                 </div>
               </div>
               <span className="font-medium text-gray-600 text-sm">
-                {state.theme.price > 0 ? `+$${state.theme.price}` : 'Free'}
+                {state.theme.price > 0 ? `+PKR ${state.theme.price}` : 'Free'}
               </span>
             </div>
           )}
@@ -105,7 +105,7 @@ export const BirthdaySidebar = () => {
                 </div>
               </div>
               {state.flavor.isPremium && (
-                <span className="font-medium text-gray-600 text-sm">+${premiumCost}</span>
+                <span className="font-medium text-gray-600 text-sm">+PKR {premiumCost}</span>
               )}
             </div>
           )}
@@ -157,7 +157,7 @@ export const BirthdaySidebar = () => {
                   <p className="text-[11px] text-gray-400">{state.size.servings}</p>
                 </div>
               </div>
-              <span className="font-medium text-gray-600 text-sm">${state.size.basePrice}</span>
+              <span className="font-medium text-gray-600 text-sm">PKR {state.size.basePrice}</span>
             </div>
           )}
 
@@ -179,7 +179,7 @@ export const BirthdaySidebar = () => {
                   </p>
                 </div>
               </div>
-              <span className="font-medium text-gray-600 text-sm">+${addOnsTotal}</span>
+              <span className="font-medium text-gray-600 text-sm">+PKR {addOnsTotal}</span>
             </div>
           )}
         </div>
@@ -191,7 +191,7 @@ export const BirthdaySidebar = () => {
               <span className="text-sm text-gray-500">Estimated Total</span>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-bold text-[#8c6b7a]">${total || '0'}</span>
+              <span className="text-2xl font-bold text-[#8c6b7a]">PKR {total || '0'}</span>
             </div>
           </div>
         </div>
@@ -217,3 +217,4 @@ export const BirthdaySidebar = () => {
     </div>
   );
 };
+

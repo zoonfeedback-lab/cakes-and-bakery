@@ -38,7 +38,7 @@ export const AddOnsStep = () => {
               <div className="flex flex-col justify-between flex-1 py-1">
                 <div>
                   <h3 className="font-semibold text-gray-800">{addon.title}</h3>
-                  <p className="text-[#8c6b7a] font-medium">+${addon.price}</p>
+                  <p className="text-[#8c6b7a] font-medium">+PKR {addon.price}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <button 
@@ -65,3 +65,4 @@ export const AddOnsStep = () => {
     </div>
   );
 };
+

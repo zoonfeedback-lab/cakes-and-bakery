@@ -70,7 +70,7 @@ export const FlavorStep = () => {
                     <span className="font-medium text-gray-800">{flavor.title}</span>
                     {isSelected && <span className="text-[#8c6b7a]">✓</span>}
                   </div>
-                  <span className="text-sm text-[#8c6b7a] mt-1">+${flavor.premiumSurcharge} per pound</span>
+                  <span className="text-sm text-[#8c6b7a] mt-1">+PKR {flavor.premiumSurcharge} per pound</span>
                 </div>
               );
             })}
@@ -80,3 +80,4 @@ export const FlavorStep = () => {
     </div>
   );
 };
+

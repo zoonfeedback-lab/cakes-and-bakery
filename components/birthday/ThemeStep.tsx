@@ -59,7 +59,7 @@ export const ThemeStep = () => {
               <div className="p-4 bg-white">
                 <h3 className="font-semibold text-lg text-gray-800">{theme.title}</h3>
                 <p className="text-[#8c6b7a] font-medium mt-1">
-                  {theme.price > 0 ? `+$${theme.price}` : 'Included'}
+                  {theme.price > 0 ? `+PKR ${theme.price}` : 'Included'}
                 </p>
               </div>
             </div>
@@ -69,3 +69,4 @@ export const ThemeStep = () => {
     </div>
   );
 };
+

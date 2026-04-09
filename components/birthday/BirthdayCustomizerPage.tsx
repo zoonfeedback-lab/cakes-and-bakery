@@ -155,7 +155,7 @@ export const BirthdayCustomizerPage = () => {
                   }`}
                 >
                   <span className="font-semibold text-gray-800">{s.label}</span>
-                  <span className="text-xs text-gray-400 mt-0.5">Serves {s.serves} · ${s.price}</span>
+                  <span className="text-xs text-gray-400 mt-0.5">Serves {s.serves} · PKR {s.price}</span>
                 </button>
               ))}
             </div>
@@ -237,7 +237,7 @@ export const BirthdayCustomizerPage = () => {
                   }`}
                 >
                   <span className="font-medium text-gray-700">{t.label}</span>
-                  <span className="text-xs text-[#8c6b7a]">{t.price > 0 ? `+$${t.price}` : 'Free'}</span>
+                  <span className="text-xs text-[#8c6b7a]">{t.price > 0 ? `+PKR ${t.price}` : 'Free'}</span>
                 </button>
               ))}
             </div>
@@ -304,7 +304,7 @@ export const BirthdayCustomizerPage = () => {
                   <div key={a.id} className="flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white">
                     <div>
                       <span className="text-sm font-medium text-gray-700">{a.label}</span>
-                      <span className="text-xs text-[#8c6b7a] ml-2">+${a.price}</span>
+                      <span className="text-xs text-[#8c6b7a] ml-2">+PKR {a.price}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <button onClick={() => toggleAddon(a.id, -1)} className="w-7 h-7 rounded-full border border-gray-200 text-gray-500 flex items-center justify-center hover:bg-gray-50 text-sm">−</button>
@@ -321,13 +321,13 @@ export const BirthdayCustomizerPage = () => {
           <div className="bg-[#fdfafb] rounded-2xl p-5 border border-[#8c6b7a]/10 mb-6">
             <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-[#8c6b7a] mb-4">Price Summary</h3>
             <div className="space-y-2 text-sm">
-              <div className="flex justify-between"><span className="text-gray-500">Base Cake ({size.label}, {tierCount === 1 ? 'Single' : tierCount === 2 ? 'Double' : 'Three'} Tier)</span><span className="font-medium">${basePrice}</span></div>
-              {themePrice > 0 && <div className="flex justify-between"><span className="text-gray-500">Theme ({theme.label})</span><span className="font-medium">+${themePrice}</span></div>}
-              {decoPrice > 0 && <div className="flex justify-between"><span className="text-gray-500">Decorations ({decorations.length})</span><span className="font-medium">+${decoPrice}</span></div>}
-              {addOnTotal > 0 && <div className="flex justify-between"><span className="text-gray-500">Extras</span><span className="font-medium">+${addOnTotal}</span></div>}
+              <div className="flex justify-between"><span className="text-gray-500">Base Cake ({size.label}, {tierCount === 1 ? 'Single' : tierCount === 2 ? 'Double' : 'Three'} Tier)</span><span className="font-medium">PKR {basePrice}</span></div>
+              {themePrice > 0 && <div className="flex justify-between"><span className="text-gray-500">Theme ({theme.label})</span><span className="font-medium">+PKR {themePrice}</span></div>}
+              {decoPrice > 0 && <div className="flex justify-between"><span className="text-gray-500">Decorations ({decorations.length})</span><span className="font-medium">+PKR {decoPrice}</span></div>}
+              {addOnTotal > 0 && <div className="flex justify-between"><span className="text-gray-500">Extras</span><span className="font-medium">+PKR {addOnTotal}</span></div>}
               <div className="flex justify-between items-center pt-3 border-t border-[#8c6b7a]/10 mt-3">
                 <span className="text-lg font-bold text-gray-800">Total</span>
-                <span className="text-xl font-bold text-[#8c6b7a]">${total}</span>
+                <span className="text-xl font-bold text-[#8c6b7a]">PKR {total}</span>
               </div>
             </div>
           </div>
@@ -339,7 +339,7 @@ export const BirthdayCustomizerPage = () => {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
           <div className="hidden sm:block">
             <p className="text-xs text-gray-400">Estimated Total</p>
-            <p className="text-xl font-bold text-[#8c6b7a]">${total}</p>
+            <p className="text-xl font-bold text-[#8c6b7a]">PKR {total}</p>
           </div>
           <div className="flex gap-3 flex-1 sm:flex-none">
             <button className="flex-1 sm:flex-none py-3 px-6 rounded-xl border-2 border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
@@ -357,3 +357,4 @@ export const BirthdayCustomizerPage = () => {
     </div>
   );
 };
+
