@@ -11,7 +11,7 @@ export const MobileSummary = () => {
   const baseSizePrice = state.size?.basePrice || 0;
   const themeCost = state.theme?.price || 0;
   const multiplier = state.cakeType?.priceMultiplier || 1;
-  const premiumCost = state.flavor?.premiumSurcharge ? state.flavor.premiumSurcharge * (parseFloat(state.size?.id) || 1) : 0;
+  const premiumCost = state.flavor?.premiumSurcharge ? state.flavor.premiumSurcharge * (parseFloat(state.size?.id ?? '1') || 1) : 0;
   const addOnsTotal = Object.entries(state.addOns).reduce((total, [id, qty]) => {
     const addon = ADDONS_OPTIONS.find(a => a.id === id);
     return total + ((addon?.price || 0) * qty);
