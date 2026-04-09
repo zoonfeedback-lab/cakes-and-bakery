@@ -31,7 +31,7 @@ export const StudioForm = ({
       finish: selections.finish,
       msg: selections.message,
     });
-    router.push(`/studio/review?${params.toString()}`);
+    router.push(`/custom/review?${params.toString()}`);
   }
   return (
     <div className="flex flex-col space-y-12 py-6">

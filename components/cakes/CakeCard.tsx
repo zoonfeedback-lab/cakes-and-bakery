@@ -54,7 +54,7 @@ export const CakeCard = ({ cake }: CakeCardProps) => {
         </p>
         
         <Link
-          href={`/studio?cake=${cake.id}`}
+          href={`/custom?cake=${cake.id}`}
           className="mt-auto inline-flex w-full items-center justify-center rounded-full border border-primary bg-transparent px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-primary transition-all hover:bg-primary hover:text-white sm:px-5 sm:py-3 sm:text-sm"
         >
           Customize
