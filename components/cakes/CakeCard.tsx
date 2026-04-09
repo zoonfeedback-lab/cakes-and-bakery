@@ -1,5 +1,6 @@
 import { CakeProduct } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type CakeCardProps = Readonly<{
   cake: CakeProduct;
@@ -26,12 +27,12 @@ export const CakeCard = ({ cake }: CakeCardProps) => {
           </span>
         </div>
         <p className="body-copy min-h-[4.25rem] text-sm">{cake.description}</p>
-        <button
+        <Link
+          href={`/studio?cake=${cake.id}`}
           className="mt-auto inline-flex w-full items-center justify-center rounded-full border border-primary bg-transparent px-5 py-3 text-sm uppercase tracking-[0.16em] text-primary transition-colors hover:bg-primary hover:text-white"
-          type="button"
         >
           Customize
-        </button>
+        </Link>
       </div>
     </article>
   );
