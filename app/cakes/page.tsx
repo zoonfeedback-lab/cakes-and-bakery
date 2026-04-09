@@ -11,7 +11,7 @@ import {
 import { SITE_NAME } from '@/theme';
 
 export const metadata: Metadata = {
-    title: `Cakes - ${SITE_NAME}`,
+    title: `Cakes | ${SITE_NAME}`,
     description:
         'Explore our collection of meticulously crafted cakes for birthdays, weddings, and every special occasion.',
 };

@@ -6,7 +6,7 @@ import { BirthdayProvider } from '@/components/birthday/BirthdayContext';
 import { SITE_NAME } from '@/theme';
 
 export const metadata: Metadata = {
-  title: `Design Birthday Cake - ${SITE_NAME}`,
+  title: `Design Birthday Cake | ${SITE_NAME}`,
   description: 'Design your perfect birthday cake with our realistic live customizer. Choose theme, flavor, size, and decorations.',
 };
 

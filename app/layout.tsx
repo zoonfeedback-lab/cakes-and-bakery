@@ -10,7 +10,7 @@ const greatVibes = Great_Vibes({ weight: "400", subsets: ["latin"], variable: "-
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `${SITE_NAME} - Premium Custom Cakes & Bakery`,
+  title: `${SITE_NAME} | Premium Custom Cakes & Bakery`,
   description: SITE_DESCRIPTION,
   keywords: ["custom cakes", "bakery", "celebration cakes", "wedding cakes", "birthday cakes"],
   authors: [{ name: SITE_NAME }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    title: `${SITE_NAME} - Premium Custom Cakes & Bakery`,
+    title: `${SITE_NAME} | Premium Custom Cakes & Bakery`,
     description: "Craft your perfect celebration with our premium custom cakes.",
     images: [
       {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} - Premium Custom Cakes & Bakery`,
+    title: `${SITE_NAME} | Premium Custom Cakes & Bakery`,
     description: "Craft your perfect celebration with our premium custom cakes.",
     images: ["/og-image.jpg"],
   },
