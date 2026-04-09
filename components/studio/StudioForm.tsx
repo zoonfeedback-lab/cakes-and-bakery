@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 
 type StudioFormProps = Readonly<{
   title: string;
+  itemId?: string;
+  isBake?: boolean;
   onSelectionChange: (category: string, id: string) => void;
   selections: {
     sponge: string;
@@ -17,6 +19,8 @@ type StudioFormProps = Readonly<{
 
 export const StudioForm = ({ 
   title,
+  itemId,
+  isBake,
   onSelectionChange, 
   selections, 
   onMessageChange 
@@ -24,14 +28,21 @@ export const StudioForm = ({
   const router = useRouter();
 
   function handleAddToOrder() {
-    const params = new URLSearchParams({
-      cake: title,
+    const paramsOptions: Record<string, string> = {
       sponge: selections.sponge,
       filling: selections.filling,
       finish: selections.finish,
       msg: selections.message,
-    });
-    router.push(`/studio/review?${params.toString()}`);
+    };
+    
+    if (isBake) {
+      paramsOptions.bake = itemId || title;
+    } else {
+      paramsOptions.cake = itemId || title;
+    }
+
+    const params = new URLSearchParams(paramsOptions);
+    router.push(`/custom/review?${params.toString()}`);
   }
   return (
     <div className="flex flex-col space-y-12 py-6">
@@ -45,13 +56,13 @@ export const StudioForm = ({
         </p>
       </div>
 
-      {/* 01 Base Sponge */}
+      {/* 01 Base Flavor */}
       <section className="space-y-6">
         <div className="flex items-center gap-6">
           <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d3c8be] font-serif text-sm italic text-[#4a2b3d]">
             01
           </span>
-          <h3 className="font-serif text-2xl text-[#4a2b3d]">Base Sponge</h3>
+          <h3 className="font-serif text-2xl text-[#4a2b3d]">{isBake ? 'Primary Flavor' : 'Base Sponge'}</h3>
           <div className="flex-1 border-t border-[#d3c8be]/40" />
         </div>
 
@@ -84,13 +95,13 @@ export const StudioForm = ({
         </div>
       </section>
 
-      {/* 02 Signature Filling */}
+      {/* 02 Signature Mix-in */}
       <section className="space-y-6">
         <div className="flex items-center gap-6">
           <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d3c8be] font-serif text-sm italic text-[#4a2b3d]">
             02
           </span>
-          <h3 className="font-serif text-2xl text-[#4a2b3d]">Signature Filling</h3>
+          <h3 className="font-serif text-2xl text-[#4a2b3d]">{isBake ? 'Signature Mix-ins' : 'Signature Filling'}</h3>
           <div className="flex-1 border-t border-[#d3c8be]/40" />
         </div>
 
@@ -117,7 +128,7 @@ export const StudioForm = ({
           <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d3c8be] font-serif text-sm italic text-[#4a2b3d]">
             03
           </span>
-          <h3 className="font-serif text-2xl text-[#4a2b3d]">Heritage Finish</h3>
+          <h3 className="font-serif text-2xl text-[#4a2b3d]">{isBake ? 'Finishing Touch' : 'Heritage Finish'}</h3>
           <div className="flex-1 border-t border-[#d3c8be]/40" />
         </div>
 

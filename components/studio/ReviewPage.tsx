@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
+import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 
 export const ReviewPage = () => {
@@ -18,19 +19,44 @@ export const ReviewPage = () => {
 const ReviewContent = () => {
   const searchParams = useSearchParams();
   const cakeName = searchParams.get('cake');
+  const cakeId = searchParams.get('cake');
+  const bakeId = searchParams.get('bake');
+  
+  // Cake Params
   const spongeId = searchParams.get('sponge');
   const fillingId = searchParams.get('filling');
   const finishId = searchParams.get('finish');
+  
+  // Bake Params
+  const flavorParam = searchParams.get('flavor');
+  const quantityParam = searchParams.get('quantity');
+  const boxTypeParam = searchParams.get('boxType');
+  const addonsParam = searchParams.get('addons');
+  
   const message = searchParams.get('msg');
 
   // Resolve selections
-  const selectedCake = CAKE_SHOP_ITEMS.find((c) => c.name === cakeName) || DEFAULT_STUDIO_CAKE;
+  let selectedItem;
+  let isBake = false;
+
+  if (bakeId) {
+    selectedItem = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId) || BAKES_SHOP_ITEMS[0];
+    isBake = true;
+  } else {
+    selectedItem = CAKE_SHOP_ITEMS.find((c) => c.name === cakeName || c.id === cakeId) || DEFAULT_STUDIO_CAKE;
+  }
+
   const sponge = STUDIO_SPONGES.find((s) => s.id === spongeId) || STUDIO_SPONGES[0];
   const filling = STUDIO_FILLINGS.find((f) => f.id === fillingId) || STUDIO_FILLINGS[0];
   const finish = STUDIO_FINISHES.find((f) => f.id === finishId) || STUDIO_FINISHES[0];
+  
+  const bakeFlavor = flavorParam || 'Signature Sweet';
+  const bakeQuantity = quantityParam || 'Standard Box';
+  const bakeBox = boxTypeParam || 'Classic Box';
+  const bakeAddons = addonsParam ? addonsParam.split(',').join(', ') : 'None';
 
-  const subtotal = selectedCake.price;
-  const calligraphyFee = 3500;
+  const subtotal = selectedItem.price;
+  const calligraphyFee = isBake ? 500 : 3500;
   const deliveryFee = 1200;
   const total = subtotal + calligraphyFee + deliveryFee;
 
@@ -52,7 +78,7 @@ const ReviewContent = () => {
           <div className="space-y-8">
             <div className="relative aspect-[0.9] w-full overflow-hidden rounded-[2rem] shadow-xl">
               <Image
-                src={selectedCake.image}
+                src={selectedItem.image}
                 alt="Your Bespoke Selection"
                 fill
                 className="object-cover"
@@ -91,7 +117,7 @@ const ReviewContent = () => {
             <div className="mb-10 flex items-center gap-6">
               <div className="flex-1 border-t border-[#d3c8be]/40" />
               <h2 className="font-serif text-3xl italic text-[#4a2b3d]">
-                {selectedCake.name}
+                {selectedItem.name}
               </h2>
               <div className="flex-1 border-t border-[#d3c8be]/40" />
             </div>
@@ -99,35 +125,35 @@ const ReviewContent = () => {
             {/* Selections Grid */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <SelectionCard 
-                label="Sponge Base" 
-                value={sponge.label} 
+                label={isBake ? "Primary Flavor" : "Sponge Base"} 
+                value={isBake ? bakeFlavor : sponge.label} 
                 icon="📊" 
               />
               <SelectionCard 
-                label="Gourmet Filling" 
-                value={filling.label} 
-                icon="✨" 
+                label={isBake ? "Volume" : "Gourmet Filling"} 
+                value={isBake ? bakeQuantity : filling.label} 
+                icon={isBake ? "📦" : "✨"} 
               />
               <SelectionCard 
-                label="Exterior Finish" 
-                value={finish.label} 
-                icon="✨" 
+                label={isBake ? "Box Style" : "Exterior Finish"} 
+                value={isBake ? bakeBox : finish.label} 
+                icon={isBake ? "🎁" : "✨"} 
               />
               <SelectionCard 
-                label="Dimensions" 
-                value={selectedCake.dimensions || 'Standard Tier (Serves 12-15)'} 
-                icon="🎂" 
+                label={isBake ? "Extras" : "Dimensions"} 
+                value={isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
+                icon="✨" 
               />
             </div>
 
             {/* Pricing Section */}
             <section className="mt-12 space-y-4 rounded-2xl border border-[#d3c8be]/30 bg-[#f8f5f1]/30 p-8">
               <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                <span>Bespoke Cake Crafting</span>
+                <span>{isBake ? "Artisanal Bakes Crafting" : "Bespoke Cake Crafting"}</span>
                 <span>Rs. {subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                <span>Custom Calligraphy & Gold Leaf</span>
+                <span>{isBake ? "Custom Note & Packaging" : "Custom Calligraphy & Gold Leaf"}</span>
                 <span>Rs. {calligraphyFee.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
@@ -156,7 +182,7 @@ const ReviewContent = () => {
                 Proceed to Secure Checkout &rarr;
               </button>
               <Link 
-                href="/studio"
+                href="/custom"
                 className="flex items-center justify-center rounded-lg border border-[#d3c8be] bg-white px-8 py-5 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#4a2b3d] transition-all hover:bg-[#f8f5f1]"
               >
                 Edit Design

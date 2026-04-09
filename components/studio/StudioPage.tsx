@@ -4,8 +4,10 @@ import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, Suspense } from 'react';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
+import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
 import StudioPreview from './StudioPreview';
 import StudioForm from './StudioForm';
+import BakeStudioForm from './BakeStudioForm';
 
 export const StudioPage = () => {
   return (
@@ -18,6 +20,7 @@ export const StudioPage = () => {
 const StudioContent = () => {
   const searchParams = useSearchParams();
   const cakeId = searchParams.get('cake');
+  const bakeId = searchParams.get('bake');
 
   const [selections, setSelections] = useState({
     sponge: STUDIO_SPONGES[0].id,
@@ -26,49 +29,85 @@ const StudioContent = () => {
     message: '',
   });
 
-  const currentCake = useMemo(() => {
-    if (!cakeId) {
-      return DEFAULT_STUDIO_CAKE;
-    }
+  const [bakeSelections, setBakeSelections] = useState({
+    flavor: 'Chocolate',
+    quantity: 'Box of 6',
+    boxType: 'Classic Box',
+    addons: [] as string[],
+    message: '',
+  });
 
-    const cake = CAKE_SHOP_ITEMS.find((item) => item.id === cakeId);
-    if (!cake) {
-      return DEFAULT_STUDIO_CAKE;
-    }
+  const [currentItem, setCurrentItem] = useState(DEFAULT_STUDIO_CAKE);
+  const [isBake, setIsBake] = useState(false);
 
-    return {
-      id: cake.id,
-      name: cake.name,
-      price: cake.price,
-      weight: '2.5KG',
-      image: cake.image,
-      dimensions: cake.dimensions ?? DEFAULT_STUDIO_CAKE.dimensions,
-    };
-  }, [cakeId]);
+  useEffect(() => {
+    if (bakeId) {
+      const bake = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId);
+      if (bake) {
+        setIsBake(true);
+        setCurrentItem({
+          id: bake.id,
+          name: bake.name,
+          price: bake.price * 100, // Matching the price scale
+          weight: 'Standard Box',
+          image: bake.image,
+        });
+      }
+    } else if (cakeId) {
+      const cake = CAKE_SHOP_ITEMS.find((c) => c.id === cakeId);
+      if (cake) {
+        setIsBake(false);
+        setCurrentItem({
+          id: cake.id,
+          name: cake.name,
+          price: cake.price * 100,
+          weight: '2.5KG',
+          image: cake.image,
+        });
+      }
+    }
+  }, [cakeId, bakeId]);
 
   const handleSelectionChange = (category: string, id: string) => {
     setSelections((prev) => ({ ...prev, [category]: id }));
   };
 
+  const handleBakeSelectionChange = (category: string, value: string | string[]) => {
+    setBakeSelections((prev) => ({ ...prev, [category]: value }));
+  };
+
   const handleMessageChange = (message: string) => {
     setSelections((prev) => ({ ...prev, message }));
+    setBakeSelections((prev) => ({ ...prev, message }));
   };
 
   return (
     <main className="min-h-screen bg-[#FDFCFB] px-4 py-12 md:px-8 lg:py-20">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
         <StudioPreview
-          name={currentCake.name}
-          price={currentCake.price}
-          weight={currentCake.weight}
-          image={currentCake.image}
+          name={currentItem.name}
+          price={currentItem.price}
+          weight={currentItem.weight}
+          image={currentItem.image}
         />
-        <StudioForm
-          title={currentCake.name}
-          selections={selections}
-          onSelectionChange={handleSelectionChange}
-          onMessageChange={handleMessageChange}
-        />
+        {isBake ? (
+          <BakeStudioForm
+            title={currentItem.name}
+            itemId={currentItem.id}
+            selections={bakeSelections}
+            onSelectionChange={handleBakeSelectionChange}
+            onMessageChange={handleMessageChange}
+          />
+        ) : (
+          <StudioForm
+            title={currentItem.name}
+            itemId={currentItem.id}
+            isBake={isBake}
+            selections={selections}
+            onSelectionChange={handleSelectionChange}
+            onMessageChange={handleMessageChange}
+          />
+        )}
       </div>
     </main>
   );

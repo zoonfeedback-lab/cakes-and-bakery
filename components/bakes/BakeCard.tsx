@@ -1,5 +1,6 @@
 import type { BakeProduct } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type BakeCardProps = Readonly<{
     item: BakeProduct;
@@ -55,7 +56,9 @@ export const BakeCard = ({ item }: BakeCardProps) => {
                     </div>
                 )}
 
-                <button className="btn-primary mt-6">Add to Cart</button>
+                <Link href={`/custom?bake=${item.id}`} className="btn-primary mt-6 text-center">
+                    Customize
+                </Link>
             </div>
         </article>
     );
