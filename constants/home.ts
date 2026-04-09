@@ -6,7 +6,7 @@ export const FEATURED_CAKES: CakeProduct[] = [
         name: 'Mehfil Signature',
         category: 'Signature',
         price: 45,
-        image: '/images/signature-cake.png',
+        image: '/cake.png',
         description: 'Elegant custom cakes crafted for family gatherings, dholkis, and memorable celebrations',
     },
     {
@@ -14,7 +14,7 @@ export const FEATURED_CAKES: CakeProduct[] = [
         name: 'Rozana Bakes',
         category: 'Daily',
         price: 35,
-        image: '/images/daily-bakes.png',
+        image: '/cupcake.png',
         description: 'Freshly baked treats perfect for chai time, gifting, and everyday sweet cravings',
     },
     {
@@ -22,7 +22,7 @@ export const FEATURED_CAKES: CakeProduct[] = [
         name: 'Shaadi Aur Birthday',
         category: 'Birthday',
         price: 55,
-        image: '/images/birthday-cake.png',
+        image: '/chocolate-cake.png',
         description: 'Celebrate birthdays and festive moments with joyful custom cake designs',
     },
 ];
@@ -33,7 +33,7 @@ export const GALLERY_ITEMS: CakeProduct[] = [
         name: 'Gulabo Velvet',
         category: 'Premium',
         price: 89,
-        image: '/images/velvet-rose.png',
+        image: '/cake.png',
         description: 'A graceful white celebration cake with floral styling and soft desi wedding charm',
     },
     {
@@ -41,7 +41,7 @@ export const GALLERY_ITEMS: CakeProduct[] = [
         name: 'Badami Caramel',
         category: 'Premium',
         price: 49,
-        image: '/images/salted-caramel.png',
+        image: '/pastery.png',
         description: 'Smooth caramel layers finished with a rich bakery touch and nutty warmth',
     },
     {
@@ -49,7 +49,7 @@ export const GALLERY_ITEMS: CakeProduct[] = [
         name: 'Shehnai Celebration',
         category: 'Premium',
         price: 99,
-        image: '/images/celestial.png',
+        image: '/chocolate-cake.png',
         description: 'A luxurious gold-accented cake designed for weddings, engagements, and grand events',
     },
 ];
