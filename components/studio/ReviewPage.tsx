@@ -141,7 +141,7 @@ const ReviewContent = () => {
               />
               <SelectionCard 
                 label={isBake ? "Extras" : "Dimensions"} 
-                value={isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
+                value={isBake ? bakeAddons : (selectedItem.dimensions ?? 'Standard Tier (Serves 12-15)')} 
                 icon="✨" 
               />
             </div>
@@ -220,3 +220,4 @@ const SelectionCard = ({ label, value, icon }: { label: string; value: string; i
 );
 
 export default ReviewPage;
+

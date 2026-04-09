@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
 import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
