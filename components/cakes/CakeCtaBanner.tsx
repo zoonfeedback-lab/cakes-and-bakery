@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const CakeCtaBanner = () => {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
@@ -11,12 +13,12 @@ export const CakeCtaBanner = () => {
             Let&apos;s create something unique.
           </p>
         </div>
-        <button
-          className="rounded-full bg-[#6f4c62] px-8 py-4 text-sm font-medium text-white shadow-[0_9px_20px_rgba(111,76,98,0.35)] transition hover:-translate-y-0.5"
-          type="button"
+        <Link
+          href="/studio"
+          className="rounded-full bg-[#6f4c62] px-8 py-4 text-sm font-medium text-white shadow-[0_9px_20px_rgba(111,76,98,0.35)] transition hover:-translate-y-0.5 text-center"
         >
           Design Custom Cake
-        </button>
+        </Link>
       </div>
     </section>
   );
