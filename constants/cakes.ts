@@ -1,103 +1,131 @@
-import type { CakeProduct } from '@/types';
+import { CakeProduct, FilterPill, FilterSection } from '@/types';
 
-export type CakeHeroContent = {
-    title: string;
-    description: string;
-    primaryActionLabel: string;
-    primaryActionHref: string;
-    accentImage: string;
-    featuredImage: string;
-};
-
-export const CAKES_HERO: CakeHeroContent = {
+export const CAKE_HERO = {
     title: 'Cakes for Every Occasion',
-    description:
-        'Meticulously crafted with the finest ingredients and a touch of artistic flourish for your most cherished moments.',
-    primaryActionLabel: 'Explore Collection',
-    primaryActionHref: '#cakes-grid',
-    accentImage: '/images/hero-cake.png',
-    featuredImage: '/images/salted-caramel.png',
+    subtitle: 'Meticulously crafted with the finest ingredients and a touch of artistic flourish for your most cherished moments.',
+    image1: '/images/hero-cake.png',
+    image2: '/images/salted-caramel.png',
 };
 
-export const CAKE_CATEGORY_PILLS = [
-    'All',
-    'Chocolate',
-    'Red Velvet',
-    'Vanilla',
-    'Photo Cake',
-    'Wedding Cake',
-] as const;
+export const CAKE_SORT_OPTIONS = ['Popularity', 'Newest', 'Price Low to High'];
 
-export const CAKE_SIZE_OPTIONS = [
-    '4" Bento Cake',
-    '6" Standard',
-    '8" Celebration',
-    'Tiered Artistry',
-] as const;
+export const CAKE_FILTER_PILLS: FilterPill[] = [
+    { id: 'all', label: 'All', active: true },
+    { id: 'chocolate', label: 'Chocolate' },
+    { id: 'red-velvet', label: 'Red Velvet' },
+    { id: 'vanilla', label: 'Vanilla' },
+    { id: 'photo-cake', label: 'Photo Cake' },
+    { id: 'wedding-cake', label: 'Wedding Cake' },
+];
 
-export const CAKE_OCCASIONS = [
-    'Birthday',
-    'Wedding',
-    'Anniversary',
-    'Graduation',
-] as const;
+export const CAKE_SIDEBAR_FILTERS: FilterSection[] = [
+    {
+        id: 'size',
+        title: 'Cake Size',
+        style: 'radio',
+        options: ['4" Bento Cake', '6" Standard', '8" Celebration', 'Tiered Artistry'],
+    },
+    {
+        id: 'occasion',
+        title: 'Occasion',
+        style: 'pill',
+        options: ['Birthday', 'Wedding', 'Anniversary', 'Graduation'],
+    },
+];
 
-export const CAKE_SORT_LABEL = 'Popularity';
-
-export const CAKE_PRODUCTS: CakeProduct[] = [
+export const CAKE_SHOP_ITEMS: CakeProduct[] = [
     {
         id: 'royal-velvet',
         name: 'Royal Velvet',
-        category: 'Red Velvet',
         price: 64,
         image: '/images/velvet-rose.png',
         description: 'Deep cocoa infused with crimson elegance and silky smooth cream cheese.',
+        category: 'red-velvet',
+        sizeOptions: ['6" Standard', '8" Celebration'],
+        occasions: ['Birthday', 'Anniversary'],
+        tags: ['Most Loved'],
     },
     {
         id: 'citrus-bloom',
         name: 'Citrus Bloom',
-        category: 'Vanilla',
         price: 48,
         image: '/images/daily-bakes.png',
         description: 'Zesty lemon sponge layered with citrus curd and whipped mascarpone.',
+        category: 'vanilla',
+        sizeOptions: ['4" Bento Cake', '6" Standard'],
+        occasions: ['Birthday', 'Graduation'],
     },
     {
         id: 'midnight-ganache',
         name: 'Midnight Ganache',
-        category: 'Chocolate',
         price: 72,
         image: '/images/celestial.png',
         description: 'Rich chocolate infusion with 70% dark Belgian ganache and sea salt flakes.',
+        category: 'chocolate',
+        sizeOptions: ['6" Standard', '8" Celebration'],
+        occasions: ['Wedding', 'Anniversary'],
+        tags: ['Best Seller'],
     },
     {
         id: 'summer-berry',
         name: 'Summer Berry',
-        category: 'Vanilla',
         price: 55,
         image: '/images/birthday-cake.png',
         description: 'Light vanilla sponge with locally sourced berries and chantilly cream.',
+        category: 'vanilla',
+        sizeOptions: ['4" Bento Cake', '6" Standard'],
+        occasions: ['Birthday', 'Graduation'],
     },
     {
         id: 'ivory-orchid',
         name: 'Ivory Orchid',
-        category: 'Wedding Cake',
         price: 240,
         image: '/images/signature-cake.png',
         description: 'A two-tiered architectural masterpiece with almond and honey notes.',
+        category: 'wedding-cake',
+        sizeOptions: ['Tiered Artistry'],
+        occasions: ['Wedding', 'Anniversary'],
+        tags: ['Best Seller', 'Most Loved'],
     },
     {
         id: 'caramel-drift',
         name: 'Caramel Drift',
-        category: 'Chocolate',
         price: 58,
         image: '/images/salted-caramel.png',
         description: 'Dense coffee cake with burnt caramel glaze and sea salt crunch.',
+        category: 'chocolate',
+        sizeOptions: ['6" Standard', '8" Celebration'],
+        occasions: ['Anniversary', 'Graduation'],
+    },
+    {
+        id: 'pixel-party',
+        name: 'Pixel Party',
+        price: 84,
+        image: '/images/hero-cake.png',
+        description: 'Custom edible photo print cake with buttercream frame and confetti texture.',
+        category: 'photo-cake',
+        sizeOptions: ['6" Standard', '8" Celebration'],
+        occasions: ['Birthday', 'Graduation'],
+        tags: ['Custom'],
+    },
+    {
+        id: 'gold-ribbon',
+        name: 'Gold Ribbon',
+        price: 132,
+        image: '/images/journey-1.png',
+        description: 'Floral fondant styling with smooth vanilla sponge for elegant gatherings.',
+        category: 'wedding-cake',
+        sizeOptions: ['8" Celebration', 'Tiered Artistry'],
+        occasions: ['Wedding', 'Anniversary'],
+    },
+    {
+        id: 'crimson-frost',
+        name: 'Crimson Frost',
+        price: 68,
+        image: '/images/journey-2.png',
+        description: 'Classic red velvet layers with whipped cream cheese and berry glaze.',
+        category: 'red-velvet',
+        sizeOptions: ['6" Standard', '8" Celebration'],
+        occasions: ['Birthday', 'Wedding'],
     },
 ];
-
-export const CAKES_CTA = {
-    title: "Can't find your cake?",
-    description:
-        "Our master bakers can turn your wildest imagination into a delicious reality. Let's create something unique.",
-    actionLabel: 'Design Custom Cake',
-};

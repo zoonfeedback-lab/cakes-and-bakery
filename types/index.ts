@@ -5,6 +5,9 @@ export interface CakeProduct {
     price: number;
     image: string;
     description: string;
+    sizeOptions?: string[];
+    occasions?: string[];
+    tags?: string[];
 }
 
 export interface Testimonial {
@@ -25,9 +28,7 @@ export interface JourneyStep {
 export interface BakeProduct extends CakeProduct {
     priceLabel?: string;
     imageAlt?: string;
-    boxOptions?: string[];
-    tags?: string[];
-    occasions?: string[];
+    boxOptions?: string[]; // Kept for bakes compatibility
 }
 
 export interface BakeCategory {
