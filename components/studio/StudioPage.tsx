@@ -1,7 +1,7 @@
 'use client';
 
+import { useMemo, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
 import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
@@ -37,37 +37,42 @@ const StudioContent = () => {
     message: '',
   });
 
-  const [currentItem, setCurrentItem] = useState(DEFAULT_STUDIO_CAKE);
-  const [isBake, setIsBake] = useState(false);
-
-  useEffect(() => {
+  const { currentItem, isBake } = useMemo(() => {
     if (bakeId) {
       const bake = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId);
       if (bake) {
-        setIsBake(true);
-        setCurrentItem({
-          id: bake.id,
-          name: bake.name,
-          price: bake.price * 100, // Matching the price scale
-          weight: 'Standard Box',
-          image: bake.image,
-          dimensions: bake.boxOptions?.[0] ?? 'Standard Box',
-        });
-      }
-    } else if (cakeId) {
-      const cake = CAKE_SHOP_ITEMS.find((c) => c.id === cakeId);
-      if (cake) {
-        setIsBake(false);
-        setCurrentItem({
-          id: cake.id,
-          name: cake.name,
-          price: cake.price * 100,
-          weight: '2.5KG',
-          image: cake.image,
-          dimensions: cake.dimensions ?? DEFAULT_STUDIO_CAKE.dimensions,
-        });
+        return {
+          isBake: true,
+          currentItem: {
+            id: bake.id,
+            name: bake.name,
+            price: bake.price * 100,
+            weight: 'Standard Box',
+            image: bake.image,
+            dimensions: bake.boxOptions?.[0] ?? 'Standard Box',
+          },
+        };
       }
     }
+
+    if (cakeId) {
+      const cake = CAKE_SHOP_ITEMS.find((c) => c.id === cakeId);
+      if (cake) {
+        return {
+          isBake: false,
+          currentItem: {
+            id: cake.id,
+            name: cake.name,
+            price: cake.price * 100,
+            weight: '2.5KG',
+            image: cake.image,
+            dimensions: cake.dimensions ?? DEFAULT_STUDIO_CAKE.dimensions,
+          },
+        };
+      }
+    }
+
+    return { isBake: false, currentItem: DEFAULT_STUDIO_CAKE };
   }, [cakeId, bakeId]);
 
   const handleSelectionChange = (category: string, id: string) => {
@@ -116,4 +121,3 @@ const StudioContent = () => {
 };
 
 export default StudioPage;
-
