@@ -29,5 +29,5 @@ export const BRAND_THEME = {
 export const PRIMARY_NAV_ITEMS = [
     { href: '/cakes', label: 'Cakes' },
     { href: '/bakes', label: 'Bakes' },
-    { href: '#birthdays', label: 'Birthdays' },
+    { href: '/birthday', label: 'Birthdays' },
 ] as const;

@@ -25,7 +25,8 @@ export default function BakesPage() {
                 <BakesShopHero
                     title={BAKES_HERO.title}
                     subtitle={BAKES_HERO.subtitle}
-                    image={BAKES_HERO.image}
+                    image1={BAKES_HERO.image1}
+                    image2={BAKES_HERO.image2}
                 />
                 <BakesCatalog
                     items={BAKES_SHOP_ITEMS}
