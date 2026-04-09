@@ -1,7 +1,7 @@
 'use client';
 
 import { STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type StudioFormProps = Readonly<{
   title: string;
@@ -21,6 +21,18 @@ export const StudioForm = ({
   selections, 
   onMessageChange 
 }: StudioFormProps) => {
+  const router = useRouter();
+
+  function handleAddToOrder() {
+    const params = new URLSearchParams({
+      cake: title,
+      sponge: selections.sponge,
+      filling: selections.filling,
+      finish: selections.finish,
+      msg: selections.message,
+    });
+    router.push(`/studio/review?${params.toString()}`);
+  }
   return (
     <div className="flex flex-col space-y-12 py-6">
       <div className="max-w-md">
@@ -159,7 +171,10 @@ export const StudioForm = ({
 
       {/* Actions */}
       <div className="flex gap-4 pt-6">
-        <button className="flex-1 rounded-lg bg-[#4a0404] py-5 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white shadow-lg transition-transform hover:-translate-y-0.5 active:translate-y-0">
+        <button 
+          onClick={handleAddToOrder}
+          className="flex-1 rounded-lg bg-[#4a0404] py-5 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white shadow-lg transition-transform hover:-translate-y-0.5 active:translate-y-0"
+        >
           Add to Bespoke Order
         </button>
         <button className="flex h-16 w-16 items-center justify-center rounded-lg bg-[#f5d142] text-[#4a2b3d] shadow-lg transition-transform hover:-translate-y-0.5 active:translate-y-0">
