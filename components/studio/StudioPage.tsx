@@ -8,6 +8,7 @@ import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
 import StudioPreview from './StudioPreview';
 import StudioForm from './StudioForm';
 import BakeStudioForm from './BakeStudioForm';
+import BespokeStudioForm from './BespokeStudioForm';
 
 export const StudioPage = () => {
   return (
@@ -21,6 +22,7 @@ const StudioContent = () => {
   const searchParams = useSearchParams();
   const cakeId = searchParams.get('cake');
   const bakeId = searchParams.get('bake');
+  const isBespokeType = searchParams.get('type') === 'bespoke';
 
   const [selections, setSelections] = useState({
     sponge: STUDIO_SPONGES[0].id,
@@ -37,8 +39,24 @@ const StudioContent = () => {
     message: '',
   });
 
+  const [bespokeSelections, setBespokeSelections] = useState({
+    occasion: 'Wedding',
+    tiers: 'Three-Tier Grand',
+    palette: 'Classic Whites/Cream',
+    notes: '',
+  });
+
   const { currentItem, isBake } = useMemo(() => {
-    if (bakeId) {
+    if (isBespokeType) {
+      return {
+        isBake: false,
+        currentItem: {
+          ...DEFAULT_STUDIO_CAKE,
+          name: 'Bespoke Consultation',
+          image: '/images/signature-cake.png', // Or a custom mood board image
+        }
+      };
+    } else if (bakeId) {
       const bake = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId);
       if (bake) {
         return {
@@ -83,6 +101,10 @@ const StudioContent = () => {
     setBakeSelections((prev) => ({ ...prev, [category]: value }));
   };
 
+  const handleBespokeSelectionChange = (category: string, value: string) => {
+    setBespokeSelections((prev) => ({ ...prev, [category]: value }));
+  };
+
   const handleMessageChange = (message: string) => {
     setSelections((prev) => ({ ...prev, message }));
     setBakeSelections((prev) => ({ ...prev, message }));
@@ -97,7 +119,12 @@ const StudioContent = () => {
           weight={currentItem.weight}
           image={currentItem.image}
         />
-        {isBake ? (
+        {isBespokeType ? (
+          <BespokeStudioForm
+            selections={bespokeSelections}
+            onSelectionChange={handleBespokeSelectionChange}
+          />
+        ) : isBake ? (
           <BakeStudioForm
             title={currentItem.name}
             itemId={currentItem.id}
