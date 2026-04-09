@@ -5,11 +5,11 @@ export const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-[#f0ece5] rounded-t-[3rem] mt-10 text-gray-600">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                    <div className="space-y-4">
-                        <h3 className="text-xl font-serif text-primary tracking-wide">{SITE_NAME}</h3>
+        <footer className="bg-[#f0ece5] rounded-t-[2rem] sm:rounded-t-[3rem] mt-10 text-gray-600">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 pb-6 sm:pb-8">
+                <div className="grid grid-cols-2 gap-8 sm:gap-12 md:grid-cols-4 mb-10 sm:mb-16">
+                    <div className="col-span-2 sm:col-span-1 space-y-4">
+                        <h3 className="text-lg sm:text-xl font-serif text-primary tracking-wide">{SITE_NAME}</h3>
                         <p className="text-xs leading-relaxed max-w-xs text-gray-500">
                             A family bakery where we specialize in custom artisan cakes and bakes. Crafted with delicious ingredients and love for every occasion.
                         </p>
@@ -28,8 +28,8 @@ export const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-6">Quick Links</h4>
-                        <ul className="space-y-3 text-xs uppercase tracking-widest text-gray-500">
+                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-4 sm:mb-6">Quick Links</h4>
+                        <ul className="space-y-2 sm:space-y-3 text-xs uppercase tracking-widest text-gray-500">
                             <li><Link href="#cakes" className="hover:text-primary transition-colors">Cakes</Link></li>
                             <li><Link href="/bakes" className="hover:text-primary transition-colors">Bakes</Link></li>
                             <li><Link href="#birthdays" className="hover:text-primary transition-colors">Birthdays</Link></li>
@@ -38,28 +38,28 @@ export const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-6">Company</h4>
-                        <ul className="space-y-3 text-xs uppercase tracking-widest text-gray-500">
+                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-4 sm:mb-6">Company</h4>
+                        <ul className="space-y-2 sm:space-y-3 text-xs uppercase tracking-widest text-gray-500">
                             <li><Link href="#our-story" className="hover:text-primary transition-colors">Our Story</Link></li>
                             <li><Link href="#contact-us" className="hover:text-primary transition-colors">Contact Us</Link></li>
                             <li><Link href="#privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-6">Newsletter</h4>
-                        <p className="text-xs text-gray-500 mb-4 tracking-wide max-w-[200px]">
+                    <div className="col-span-2 sm:col-span-1">
+                        <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 mb-4 sm:mb-6">Newsletter</h4>
+                        <p className="text-xs text-gray-500 mb-3 sm:mb-4 tracking-wide max-w-[220px]">
                             Join our club for sweet updates and exclusive offers
                         </p>
                         <div className="relative max-w-xs">
                             <input
                                 type="email"
                                 placeholder="Email Address"
-                                className="w-full bg-white rounded-full py-3 px-5 text-xs text-text border border-transparent focus:outline-none focus:border-primary shadow-sm"
+                                className="w-full bg-white rounded-full py-2.5 sm:py-3 px-4 sm:px-5 text-xs text-text border border-transparent focus:outline-none focus:border-primary shadow-sm"
                             />
                             <button
                                 type="button"
-                                className="absolute right-1 top-1 bottom-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-4 rounded-full hover:bg-primary-light transition-colors"
+                                className="absolute right-1 top-1 bottom-1 bg-primary text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-3 sm:px-4 rounded-full hover:bg-primary-light transition-colors"
                             >
                                 Join
                             </button>
@@ -67,11 +67,11 @@ export const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-gray-200/60 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-[10px] text-gray-400 uppercase tracking-widest">
+                <div className="pt-6 sm:pt-8 border-t border-gray-200/60 flex flex-col items-center gap-3 sm:flex-row sm:justify-between sm:gap-4">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-widest text-center">
                         &copy; {currentYear} {SITE_NAME}. Artistry in every bite.
                     </p>
-                    <div className="flex gap-6 text-[10px] uppercase tracking-widest text-gray-400">
+                    <div className="flex gap-4 sm:gap-6 text-[10px] uppercase tracking-widest text-gray-400">
                         <a href="#" className="hover:text-primary transition-colors">Instagram</a>
                         <a href="#" className="hover:text-primary transition-colors">Facebook</a>
                         <a href="#" className="hover:text-primary transition-colors">Youtube</a>
