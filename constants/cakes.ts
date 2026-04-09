@@ -3,8 +3,8 @@ import { CakeProduct, FilterPill, FilterSection } from '@/types';
 export const CAKE_HERO = {
     title: 'Cakes for Every Occasion',
     subtitle: 'Meticulously crafted with the finest ingredients and a touch of artistic flourish for your most cherished moments.',
-    image1: '/images/hero-cake.png',
-    image2: '/images/salted-caramel.png',
+    image1: '/images/cake-hero-bg.png',
+    image2: '/images/cake-hero-showcase.png',
 };
 
 export const CAKE_SORT_OPTIONS = ['Popularity', 'Newest', 'Price Low to High'];

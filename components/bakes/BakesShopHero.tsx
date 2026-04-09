@@ -4,10 +4,11 @@ import Link from 'next/link';
 type BakesShopHeroProps = Readonly<{
     title: string;
     subtitle: string;
-    image: string;
+    image1: string;
+    image2: string;
 }>;
 
-export const BakesShopHero = ({ title, subtitle, image }: BakesShopHeroProps) => {
+export const BakesShopHero = ({ title, subtitle, image1, image2 }: BakesShopHeroProps) => {
     return (
         <section className="px-4 pt-6 pb-8 sm:pt-8 sm:pb-10">
             <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[1.5rem] sm:rounded-[2.25rem] bg-[#f1d6df] shadow-[0_18px_55px_rgba(109,80,96,0.08)] md:grid-cols-[1.45fr_0.55fr]">
@@ -17,8 +18,8 @@ export const BakesShopHero = ({ title, subtitle, image }: BakesShopHeroProps) =>
                     <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(111,80,96,0.08),rgba(255,255,255,0.08),rgba(111,80,96,0.05))]" />
                     <div className="absolute inset-y-0 right-0 w-[48%]">
                         <Image
-                            src={image}
-                            alt="Bakes collection"
+                            src={image1}
+                            alt="Bakes collection overlay"
                             fill
                             className="object-cover opacity-25"
                         />
@@ -32,8 +33,8 @@ export const BakesShopHero = ({ title, subtitle, image }: BakesShopHeroProps) =>
                             </p>
                         </div>
 
-                        <div className="mt-6 sm:mt-8 flex sm:w-[28%] sm:min-w-[320px] justify-start sm:justify-center">
-                            <Link href="#bakes-grid" className="btn-primary inline-flex w-full justify-center sm:w-auto sm:min-w-[190px]">
+                        <div className="mt-6 sm:mt-8 flex justify-center w-full md:w-[70%]">
+                            <Link href="#bakes-grid" className="btn-primary inline-flex w-full sm:w-auto sm:min-w-[190px] justify-center">
                                 Explore Collection
                             </Link>
                         </div>
@@ -44,7 +45,7 @@ export const BakesShopHero = ({ title, subtitle, image }: BakesShopHeroProps) =>
                     <div className="absolute inset-y-0 left-[-32px] z-10 hidden w-16 rotate-[8deg] bg-[#f8f5f1] md:block" />
                     <div className="relative h-full min-h-[220px] overflow-hidden sm:min-h-[280px] md:min-h-[340px] md:rounded-l-[2rem]">
                         <Image
-                            src="/images/salted-caramel.png"
+                            src={image2}
                             alt="Signature bakery item"
                             fill
                             className="object-cover"
