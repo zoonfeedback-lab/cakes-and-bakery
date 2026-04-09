@@ -156,7 +156,7 @@ const ReviewContent = () => {
                 Proceed to Secure Checkout &rarr;
               </button>
               <Link 
-                href="/studio"
+                href="/custom"
                 className="flex items-center justify-center rounded-lg border border-[#d3c8be] bg-white px-8 py-5 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#4a2b3d] transition-all hover:bg-[#f8f5f1]"
               >
                 Edit Design
