@@ -14,7 +14,7 @@ export const CakeCtaBanner = () => {
           </p>
         </div>
         <Link
-          href="/custom"
+          href="/custom?type=bespoke"
           className="rounded-full bg-[#6f4c62] px-8 py-4 text-sm font-medium text-white shadow-[0_9px_20px_rgba(111,76,98,0.35)] transition hover:-translate-y-0.5 text-center"
         >
           Design Custom Cake

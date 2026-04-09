@@ -33,13 +33,25 @@ const ReviewContent = () => {
   const boxTypeParam = searchParams.get('boxType');
   const addonsParam = searchParams.get('addons');
   
+  // Bespoke Params
+  const isBespoke = searchParams.get('type') === 'bespoke';
+  const occasionParam = searchParams.get('occasion');
+  const tiersParam = searchParams.get('tiers');
+  const paletteParam = searchParams.get('palette');
+
   const message = searchParams.get('msg');
 
   // Resolve selections
   let selectedItem;
   let isBake = false;
 
-  if (bakeId) {
+  if (isBespoke) {
+    selectedItem = {
+      ...DEFAULT_STUDIO_CAKE,
+      name: 'Atelier Bespoke Commission',
+      image: '/images/signature-cake.png'
+    };
+  } else if (bakeId) {
     selectedItem = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId) || BAKES_SHOP_ITEMS[0];
     isBake = true;
   } else {
@@ -55,9 +67,13 @@ const ReviewContent = () => {
   const bakeBox = boxTypeParam || 'Classic Box';
   const bakeAddons = addonsParam ? addonsParam.split(',').join(', ') : 'None';
 
-  const subtotal = selectedItem.price;
-  const calligraphyFee = isBake ? 500 : 3500;
-  const deliveryFee = 1200;
+  const bespokeOccasion = occasionParam || 'Custom Event';
+  const bespokeTiers = tiersParam || 'Three-Tier Grand';
+  const bespokePalette = paletteParam || 'Studio Palette';
+
+  const subtotal = isBespoke ? 20000 : selectedItem.price;
+  const calligraphyFee = isBespoke ? 0 : isBake ? 500 : 3500;
+  const deliveryFee = isBespoke ? 0 : 1200;
   const total = subtotal + calligraphyFee + deliveryFee;
 
   return (
@@ -125,64 +141,93 @@ const ReviewContent = () => {
             {/* Selections Grid */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <SelectionCard 
-                label={isBake ? "Primary Flavor" : "Sponge Base"} 
-                value={isBake ? bakeFlavor : sponge.label} 
-                icon="📊" 
+                label={isBespoke ? "Occasion" : isBake ? "Primary Flavor" : "Sponge Base"} 
+                value={isBespoke ? bespokeOccasion : isBake ? bakeFlavor : sponge.label} 
+                icon={isBespoke ? "✨" : "📊"} 
               />
               <SelectionCard 
-                label={isBake ? "Volume" : "Gourmet Filling"} 
-                value={isBake ? bakeQuantity : filling.label} 
-                icon={isBake ? "📦" : "✨"} 
+                label={isBespoke ? "Architecture" : isBake ? "Volume" : "Gourmet Filling"} 
+                value={isBespoke ? bespokeTiers : isBake ? bakeQuantity : filling.label} 
+                icon={isBespoke ? "🎂" : isBake ? "📦" : "✨"} 
               />
               <SelectionCard 
-                label={isBake ? "Box Style" : "Exterior Finish"} 
-                value={isBake ? bakeBox : finish.label} 
-                icon={isBake ? "🎁" : "✨"} 
+                label={isBespoke ? "Color Palette" : isBake ? "Box Style" : "Exterior Finish"} 
+                value={isBespoke ? bespokePalette : isBake ? bakeBox : finish.label} 
+                icon={isBespoke ? "🎨" : isBake ? "🎁" : "✨"} 
               />
               <SelectionCard 
-                label={isBake ? "Extras" : "Dimensions"} 
-                value={isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
-                icon="✨" 
+                label={isBespoke ? "Design Notes" : isBake ? "Extras" : "Dimensions"} 
+                value={isBespoke ? (message ? (message.substring(0, 20) + (message.length > 20 ? '...' : '')) : 'No notes provided') : isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
+                icon="📝" 
               />
             </div>
 
             {/* Pricing Section */}
             <section className="mt-12 space-y-4 rounded-2xl border border-[#d3c8be]/30 bg-[#f8f5f1]/30 p-8">
-              <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                <span>{isBake ? "Artisanal Bakes Crafting" : "Bespoke Cake Crafting"}</span>
-                <span>Rs. {subtotal.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                <span>{isBake ? "Custom Note & Packaging" : "Custom Calligraphy & Gold Leaf"}</span>
-                <span>Rs. {calligraphyFee.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                <span>Temperature Controlled Delivery</span>
-                <span>Rs. {deliveryFee.toLocaleString()}</span>
-              </div>
-              
-              <div className="mt-8 flex items-end justify-between border-t border-[#d3c8be]/40 pt-6">
-                <span className="font-serif text-xl italic text-[#4a2b3d]">
-                  Total Investment
-                </span>
-                <div className="text-right">
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#4a2b3d]">
-                    Inclusive of all duties
-                  </span>
-                  <span className="text-4xl font-bold text-[#4a2b3d]">
-                    PKR {total.toLocaleString()}
-                  </span>
-                </div>
-              </div>
+              {isBespoke ? (
+                <>
+                  <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
+                    <span>Minimum Consultation Retainer</span>
+                    <span>Rs. {subtotal.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
+                    <span>Atelier Processing</span>
+                    <span>Complimentary</span>
+                  </div>
+                  
+                  <div className="mt-8 flex items-end justify-between border-t border-[#d3c8be]/40 pt-6">
+                    <span className="font-serif text-xl italic text-[#4a2b3d]">
+                      Initial Deposit
+                    </span>
+                    <div className="text-right">
+                      <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#4a2b3d]">
+                        To be credited towards final quote
+                      </span>
+                      <span className="text-4xl font-bold text-[#4a2b3d]">
+                        PKR {total.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
+                    <span>{isBake ? "Artisanal Bakes Crafting" : "Bespoke Cake Crafting"}</span>
+                    <span>Rs. {subtotal.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
+                    <span>{isBake ? "Custom Note & Packaging" : "Custom Calligraphy & Gold Leaf"}</span>
+                    <span>Rs. {calligraphyFee.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
+                    <span>Temperature Controlled Delivery</span>
+                    <span>Rs. {deliveryFee.toLocaleString()}</span>
+                  </div>
+                  
+                  <div className="mt-8 flex items-end justify-between border-t border-[#d3c8be]/40 pt-6">
+                    <span className="font-serif text-xl italic text-[#4a2b3d]">
+                      Total Investment
+                    </span>
+                    <div className="text-right">
+                      <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#4a2b3d]">
+                        Inclusive of all duties
+                      </span>
+                      <span className="text-4xl font-bold text-[#4a2b3d]">
+                        PKR {total.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </>
+              )}
             </section>
 
             {/* CTAs */}
             <div className="mt-10 flex gap-4">
               <button className="flex-1 rounded-lg bg-[#4a0404] py-5 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-white shadow-lg transition-all hover:bg-[#320303] hover:shadow-xl active:scale-[0.98]">
-                Proceed to Secure Checkout &rarr;
+                {isBespoke ? "Submit Consultation Request &rarr;" : "Proceed to Secure Checkout &rarr;"}
               </button>
               <Link 
-                href="/custom"
+                href={isBespoke ? "/custom?type=bespoke" : "/custom"}
                 className="flex items-center justify-center rounded-lg border border-[#d3c8be] bg-white px-8 py-5 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#4a2b3d] transition-all hover:bg-[#f8f5f1]"
               >
                 Edit Design
