@@ -1,0 +1,12 @@
+export { BakesHero } from './BakesHero';
+export { BakeCategorySection } from './BakeCategorySection';
+export { CustomizationSection } from './CustomizationSection';
+export { BuildBoxSection } from './BuildBoxSection';
+export { InfoGridSection } from './InfoGridSection';
+export { PopularBakesSection } from './PopularBakesSection';
+export { BakesFinalCta } from './BakesFinalCta';
+export { BakesShopHero } from './BakesShopHero';
+export { BakesToolbar } from './BakesToolbar';
+export { BakesProductShowcase } from './BakesProductShowcase';
+export { BakesCtaBanner } from './BakesCtaBanner';
+export { BakesCatalog } from './BakesCatalog';
