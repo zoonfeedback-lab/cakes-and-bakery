@@ -51,6 +51,7 @@ const StudioContent = () => {
           price: bake.price * 100, // Matching the price scale
           weight: 'Standard Box',
           image: bake.image,
+          dimensions: bake.boxOptions?.[0] ?? 'Standard Box',
         });
       }
     } else if (cakeId) {
@@ -63,6 +64,7 @@ const StudioContent = () => {
           price: cake.price * 100,
           weight: '2.5KG',
           image: cake.image,
+          dimensions: cake.dimensions ?? DEFAULT_STUDIO_CAKE.dimensions,
         });
       }
     }
@@ -114,3 +116,4 @@ const StudioContent = () => {
 };
 
 export default StudioPage;
+
