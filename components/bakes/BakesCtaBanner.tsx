@@ -11,7 +11,7 @@ export const BakesCtaBanner = () => {
                     </p>
                 </div>
 
-                <Link href="#bakes-grid" className="btn-primary inline-flex w-full justify-center sm:w-auto sm:min-w-[220px]">
+                <Link href="/custom?type=box" className="btn-primary inline-flex w-full justify-center sm:w-auto sm:min-w-[220px]">
                     Design Custom Box
                 </Link>
             </div>

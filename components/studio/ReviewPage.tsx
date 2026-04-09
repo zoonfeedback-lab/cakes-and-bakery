@@ -39,6 +39,12 @@ const ReviewContent = () => {
   const tiersParam = searchParams.get('tiers');
   const paletteParam = searchParams.get('palette');
 
+  // Box Params
+  const isBox = searchParams.get('type') === 'box';
+  const customBoxSize = searchParams.get('boxSize');
+  const boxAssortment = searchParams.get('assortment');
+  const boxPackaging = searchParams.get('packaging');
+
   const message = searchParams.get('msg');
 
   // Resolve selections
@@ -50,6 +56,12 @@ const ReviewContent = () => {
       ...DEFAULT_STUDIO_CAKE,
       name: 'Atelier Bespoke Commission',
       image: '/images/signature-cake.png'
+    };
+  } else if (isBox) {
+    selectedItem = {
+      ...DEFAULT_STUDIO_CAKE,
+      name: 'Custom Assortment Box',
+      image: '/images/royal-velvet.png' // General bakes image
     };
   } else if (bakeId) {
     selectedItem = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId) || BAKES_SHOP_ITEMS[0];
@@ -71,8 +83,15 @@ const ReviewContent = () => {
   const bespokeTiers = tiersParam || 'Three-Tier Grand';
   const bespokePalette = paletteParam || 'Studio Palette';
 
-  const subtotal = isBespoke ? 20000 : selectedItem.price;
-  const calligraphyFee = isBespoke ? 0 : isBake ? 500 : 3500;
+  const boxSizeResolved = customBoxSize || 'Box of 12';
+  const boxPricingMatrix: Record<string, number> = {
+    'Box of 6': 2500,
+    'Box of 12': 4500,
+    'Box of 24': 8500,
+  };
+
+  const subtotal = isBespoke ? 20000 : isBox ? boxPricingMatrix[boxSizeResolved] || 4500 : selectedItem.price;
+  const calligraphyFee = isBespoke ? 0 : isBox ? 300 : isBake ? 500 : 3500;
   const deliveryFee = isBespoke ? 0 : 1200;
   const total = subtotal + calligraphyFee + deliveryFee;
 
@@ -141,23 +160,23 @@ const ReviewContent = () => {
             {/* Selections Grid */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <SelectionCard 
-                label={isBespoke ? "Occasion" : isBake ? "Primary Flavor" : "Sponge Base"} 
-                value={isBespoke ? bespokeOccasion : isBake ? bakeFlavor : sponge.label} 
-                icon={isBespoke ? "✨" : "📊"} 
+                label={isBespoke ? "Occasion" : isBox ? "Box Size" : isBake ? "Primary Flavor" : "Sponge Base"} 
+                value={isBespoke ? bespokeOccasion : isBox ? boxSizeResolved : isBake ? bakeFlavor : sponge.label} 
+                icon={isBespoke ? "✨" : isBox ? "📦" : "📊"} 
               />
               <SelectionCard 
-                label={isBespoke ? "Architecture" : isBake ? "Volume" : "Gourmet Filling"} 
-                value={isBespoke ? bespokeTiers : isBake ? bakeQuantity : filling.label} 
-                icon={isBespoke ? "🎂" : isBake ? "📦" : "✨"} 
+                label={isBespoke ? "Architecture" : isBox ? "Assortment Details" : isBake ? "Volume" : "Gourmet Filling"} 
+                value={isBespoke ? bespokeTiers : isBox ? (boxAssortment || 'Surprise Me') : isBake ? bakeQuantity : filling.label} 
+                icon={isBespoke ? "🎂" : isBox ? "🍰" : "✨"} 
               />
               <SelectionCard 
-                label={isBespoke ? "Color Palette" : isBake ? "Box Style" : "Exterior Finish"} 
-                value={isBespoke ? bespokePalette : isBake ? bakeBox : finish.label} 
-                icon={isBespoke ? "🎨" : isBake ? "🎁" : "✨"} 
+                label={isBespoke ? "Color Palette" : isBox ? "Box Style" : isBake ? "Box Style" : "Exterior Finish"} 
+                value={isBespoke ? bespokePalette : isBox ? (boxPackaging || 'Classic Ribbon') : isBake ? bakeBox : finish.label} 
+                icon={isBespoke ? "🎨" : isBox ? "🎁" : isBake ? "🎁" : "✨"} 
               />
               <SelectionCard 
-                label={isBespoke ? "Design Notes" : isBake ? "Extras" : "Dimensions"} 
-                value={isBespoke ? (message ? (message.substring(0, 20) + (message.length > 20 ? '...' : '')) : 'No notes provided') : isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
+                label={isBespoke ? "Design Notes" : isBox ? "Extras" : isBake ? "Extras" : "Dimensions"} 
+                value={isBespoke ? (message ? (message.substring(0, 20) + (message.length > 20 ? '...' : '')) : 'No notes provided') : isBox ? (message || 'No note') : isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
                 icon="📝" 
               />
             </div>
@@ -192,11 +211,11 @@ const ReviewContent = () => {
               ) : (
                 <>
                   <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                    <span>{isBake ? "Artisanal Bakes Crafting" : "Bespoke Cake Crafting"}</span>
+                    <span>{isBox ? "Curated Bakery Assortment" : isBake ? "Artisanal Bakes Crafting" : "Bespoke Cake Crafting"}</span>
                     <span>Rs. {subtotal.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
-                    <span>{isBake ? "Custom Note & Packaging" : "Custom Calligraphy & Gold Leaf"}</span>
+                    <span>{isBox ? "Premium Packaging & Ribbon" : isBake ? "Custom Note & Packaging" : "Custom Calligraphy & Gold Leaf"}</span>
                     <span>Rs. {calligraphyFee.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-[0.85rem] text-[#6b5c65]">
@@ -227,7 +246,7 @@ const ReviewContent = () => {
                 {isBespoke ? "Submit Consultation Request &rarr;" : "Proceed to Secure Checkout &rarr;"}
               </button>
               <Link 
-                href={isBespoke ? "/custom?type=bespoke" : "/custom"}
+                href={isBespoke ? "/custom?type=bespoke" : isBox ? "/custom?type=box" : "/custom"}
                 className="flex items-center justify-center rounded-lg border border-[#d3c8be] bg-white px-8 py-5 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#4a2b3d] transition-all hover:bg-[#f8f5f1]"
               >
                 Edit Design
