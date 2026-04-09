@@ -5,7 +5,8 @@ export const BAKES_HERO = {
     subtitle: 'Brownies, cookies, cupcakes and more baked fresh for every occasion.',
     primaryCta: 'Order Now',
     secondaryCta: 'Customize Your Box',
-    image: '/images/daily-bakes.png',
+    image1: '/images/daily-bakes.png',
+    image2: '/images/bakes-hero-showcase.png',
 };
 
 export const BAKE_CATEGORIES: BakeCategory[] = [
