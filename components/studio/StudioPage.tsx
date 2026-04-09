@@ -9,6 +9,7 @@ import StudioPreview from './StudioPreview';
 import StudioForm from './StudioForm';
 import BakeStudioForm from './BakeStudioForm';
 import BespokeStudioForm from './BespokeStudioForm';
+import BuildBoxStudioForm from './BuildBoxStudioForm';
 
 export const StudioPage = () => {
   return (
@@ -23,6 +24,7 @@ const StudioContent = () => {
   const cakeId = searchParams.get('cake');
   const bakeId = searchParams.get('bake');
   const isBespokeType = searchParams.get('type') === 'bespoke';
+  const isBoxType = searchParams.get('type') === 'box';
 
   const [selections, setSelections] = useState({
     sponge: STUDIO_SPONGES[0].id,
@@ -46,14 +48,21 @@ const StudioContent = () => {
     notes: '',
   });
 
+  const [boxSelections, setBoxSelections] = useState({
+    boxSize: 'Box of 12',
+    assortment: {} as Record<string, number>,
+    packaging: 'Classic Pink Ribbon',
+    notes: '',
+  });
+
   const { currentItem, isBake } = useMemo(() => {
-    if (isBespokeType) {
+    if (isBespokeType || isBoxType) {
       return {
         isBake: false,
         currentItem: {
           ...DEFAULT_STUDIO_CAKE,
-          name: 'Bespoke Consultation',
-          image: '/images/signature-cake.png', // Or a custom mood board image
+          name: isBoxType ? 'Assorted Bakery Box' : 'Bespoke Consultation',
+          image: '/images/signature-cake.png', 
         }
       };
     } else if (bakeId) {
@@ -105,6 +114,10 @@ const StudioContent = () => {
     setBespokeSelections((prev) => ({ ...prev, [category]: value }));
   };
 
+  const handleBoxSelectionChange = (category: string, value: any) => {
+    setBoxSelections((prev) => ({ ...prev, [category]: value }));
+  };
+
   const handleMessageChange = (message: string) => {
     setSelections((prev) => ({ ...prev, message }));
     setBakeSelections((prev) => ({ ...prev, message }));
@@ -123,6 +136,11 @@ const StudioContent = () => {
           <BespokeStudioForm
             selections={bespokeSelections}
             onSelectionChange={handleBespokeSelectionChange}
+          />
+        ) : isBoxType ? (
+          <BuildBoxStudioForm
+            selections={boxSelections}
+            onSelectionChange={handleBoxSelectionChange}
           />
         ) : isBake ? (
           <BakeStudioForm
