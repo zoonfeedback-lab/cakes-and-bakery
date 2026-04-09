@@ -9,6 +9,8 @@ export interface CakeProduct {
     occasions?: string[];
     tags?: string[];
     dimensions?: string;
+    priceLabel?: string;
+    imageAlt?: string;
 }
 
 export interface Testimonial {

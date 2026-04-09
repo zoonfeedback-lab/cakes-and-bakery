@@ -29,6 +29,7 @@ export const CakeCatalog = ({
   const [selectedSize, setSelectedSize] = useState(filters[0]?.options[1] ?? '');
   const [selectedOccasions, setSelectedOccasions] = useState<string[]>([]);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const deferredPill = useDeferredValue(activePillId);
   const deferredSort = useDeferredValue(activeSort);
@@ -58,11 +59,13 @@ export const CakeCatalog = ({
         if (deferredSort === 'Newest') return right.id.localeCompare(left.id);
 
         const leftScore =
-          (left.tags?.includes('Best Seller') ? 2 : 0) +
-          (left.tags?.includes('Most Loved') ? 2 : 0);
+          (left.tags?.includes('Best Seller') ? 3 : 0) +
+          (left.tags?.includes('Most Loved') ? 2 : 0) +
+          (left.category === 'wedding-cake' ? 1 : 0);
         const rightScore =
-          (right.tags?.includes('Best Seller') ? 2 : 0) +
-          (right.tags?.includes('Most Loved') ? 2 : 0);
+          (right.tags?.includes('Best Seller') ? 3 : 0) +
+          (right.tags?.includes('Most Loved') ? 2 : 0) +
+          (right.category === 'wedding-cake' ? 1 : 0);
 
         return rightScore - leftScore;
       });
@@ -117,37 +120,53 @@ export const CakeCatalog = ({
         onSortChange={setActiveSort}
       />
 
-      <section id="cakes-grid" className="px-4 py-8 md:py-12">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
-          <CakeSidebar
-            filters={filters}
-            maxPrice={maxPrice}
-            priceCap={priceCap}
-            onPriceChange={handlePriceChange}
-            selectedSize={selectedSize}
-            selectedOccasions={selectedOccasions}
-            onSizeChange={handleSizeChange}
-            onOccasionToggle={handleOccasionToggle}
-          />
+      <section id="cakes-grid" className="px-4 py-6 sm:py-12">
+        {/* Mobile Filter Toggle */}
+        <div className="mx-auto mb-6 flex max-w-7xl lg:hidden">
+            <button
+                type="button"
+                onClick={() => setFiltersOpen(!filtersOpen)}
+                className="inline-flex items-center gap-2 rounded-full bg-[#f2ede7] px-5 py-2.5 text-[11px] uppercase tracking-[0.14em] text-text-soft transition-colors hover:bg-[#eadfd3]"
+            >
+                <svg className={`h-4 w-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                {filtersOpen ? 'Hide Preferences' : 'Tailor Preferences'}
+            </button>
+        </div>
+
+        <div className="mx-auto grid max-w-7xl gap-6 sm:gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
+          <div className={`${filtersOpen ? 'block' : 'hidden'} lg:block`}>
+            <CakeSidebar
+                filters={filters}
+                maxPrice={maxPrice}
+                priceCap={priceCap}
+                onPriceChange={handlePriceChange}
+                selectedSize={selectedSize}
+                selectedOccasions={selectedOccasions}
+                onSizeChange={handleSizeChange}
+                onOccasionToggle={handleOccasionToggle}
+            />
+          </div>
 
           <div>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 xl:grid-cols-3">
               {visibleCakes.map((cake) => (
                 <CakeCard key={cake.id} cake={cake} />
               ))}
             </div>
 
             {visibleCakes.length === 0 ? (
-              <div className="mt-2 rounded-2xl border border-dashed border-[#d3c8be] bg-[#f8f6f2] p-8 text-center text-[#6b5c65]">
+              <div className="mt-2 rounded-2xl border border-dashed border-[#d3c8be] bg-white/50 p-8 text-center text-[#6b5c65] backdrop-blur-sm">
                 No cakes match the current filters. Try a higher price cap or fewer
                 occasion filters.
               </div>
             ) : null}
 
             {canLoadMore ? (
-              <div className="mt-12 flex justify-center">
+              <div className="mt-8 flex justify-center sm:mt-12">
                 <button
-                  className="rounded-full bg-[#ece9e3] px-8 py-4 text-sm uppercase tracking-[0.16em] text-text transition-colors hover:bg-[#e1ddd6]"
+                  className="rounded-full bg-[#f2ede7] px-6 py-3 text-xs uppercase tracking-[0.16em] text-text transition-colors hover:bg-[#eadfd3] sm:px-8 sm:py-4 sm:text-sm"
                   onClick={handleLoadMore}
                   type="button"
                 >
