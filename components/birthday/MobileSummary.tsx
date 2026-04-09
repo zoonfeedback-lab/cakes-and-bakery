@@ -52,7 +52,7 @@ export const MobileSummary = () => {
           <p className="text-xs text-gray-500 truncate">
             {[state.theme?.title, state.cakeType?.title, state.flavor?.title].filter(Boolean).join(' · ') || 'Start building your cake'}
           </p>
-          <p className="text-lg font-bold text-[#8c6b7a]">${total || '0'}</p>
+          <p className="text-lg font-bold text-[#8c6b7a]">PKR {total || '0'}</p>
         </div>
         <div className="flex gap-2 flex-shrink-0">
           {state.currentStepIndex > 0 && (
@@ -74,3 +74,4 @@ export const MobileSummary = () => {
     </div>
   );
 };
+

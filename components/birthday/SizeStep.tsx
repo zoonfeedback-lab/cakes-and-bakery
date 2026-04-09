@@ -36,7 +36,7 @@ export const SizeStep = () => {
             >
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold text-lg text-gray-800">{size.title}</h3>
-                <span className="text-lg font-bold text-[#8c6b7a]">${size.basePrice}</span>
+                <span className="text-lg font-bold text-[#8c6b7a]">PKR {size.basePrice}</span>
               </div>
               <p className="text-sm text-gray-500">{size.servings}</p>
             </div>
@@ -46,3 +46,4 @@ export const SizeStep = () => {
     </div>
   );
 };
+
