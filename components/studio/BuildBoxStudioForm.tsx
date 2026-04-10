@@ -1,14 +1,18 @@
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+type BoxSelections = {
+  boxSize: string;
+  assortment: Record<string, number>;
+  packaging: string;
+  notes: string;
+};
+
 type BuildBoxStudioFormProps = Readonly<{
-  selections: {
-    boxSize: string;
-    assortment: Record<string, number>;
-    packaging: string;
-    notes: string;
-  };
-  onSelectionChange: (category: string, value: any) => void;
+  selections: BoxSelections;
+  onSelectionChange: <K extends keyof BoxSelections>(
+    category: K,
+    value: BoxSelections[K]
+  ) => void;
 }>;
 
 const BAKES_CATALOGUE = [
@@ -38,7 +42,7 @@ export const BuildBoxStudioForm = ({
 
     // Convert assortment object to string format: "2x Fudge Brownies, 3x Lemon Tarts"
     const assortmentString = Object.entries(selections.assortment)
-      .filter(([_, qty]) => qty > 0)
+      .filter(([, qty]) => qty > 0)
       .map(([item, qty]) => `${qty}x ${item}`)
       .join(', ');
 
