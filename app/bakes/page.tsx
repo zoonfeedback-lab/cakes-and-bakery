@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { Footer, Header } from '@/components/layout';
 import { BakesCatalog, BakesCtaBanner, BakesShopHero } from '@/components/bakes';
 import {
-    BAKES_FILTER_PILLS,
+    BAKE_FILTER_PILLS,
     BAKES_HERO,
     BAKES_SHOP_ITEMS,
-    BAKES_SIDEBAR_FILTERS,
-    BAKES_SORT_OPTIONS,
+    BAKE_SIDEBAR_FILTERS,
+    BAKE_SORT_OPTIONS,
 } from '@/constants/bakes';
 import { SITE_NAME } from '@/theme';
 
@@ -30,9 +30,9 @@ export default function BakesPage() {
                 />
                 <BakesCatalog
                     items={BAKES_SHOP_ITEMS}
-                    pills={BAKES_FILTER_PILLS}
-                    sortOptions={BAKES_SORT_OPTIONS}
-                    filters={BAKES_SIDEBAR_FILTERS}
+                    pills={BAKE_FILTER_PILLS}
+                    sortOptions={BAKE_SORT_OPTIONS}
+                    filters={BAKE_SIDEBAR_FILTERS}
                 />
                 <BakesCtaBanner />
             </main>

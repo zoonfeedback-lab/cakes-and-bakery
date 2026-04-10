@@ -83,11 +83,11 @@ const ReviewContent = () => {
   const bespokeTiers = tiersParam || 'Three-Tier Grand';
   const bespokePalette = paletteParam || 'Studio Palette';
 
-  const boxSizeResolved = customBoxSize || 'Box of 12';
+  const boxSizeResolved = customBoxSize || 'Box of 8';
   const boxPricingMatrix: Record<string, number> = {
-    'Box of 6': 2500,
-    'Box of 12': 4500,
-    'Box of 24': 8500,
+    'Box of 8': 2800,
+    'Box of 16': 5600,
+    'Box of 24': 8400,
   };
   const dimensionsLabel = selectedItem.dimensions ?? 'Standard Tier (Serves 12-15)';
   const designNotesValue = isBespoke

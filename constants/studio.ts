@@ -1,18 +1,33 @@
 export const STUDIO_SPONGES = [
   {
-    id: 'saffron-pistachio',
-    label: 'Saffron & Pistachio Infusion',
-    description: 'Infused with Iranian saffron and roasted Peshawar pistachios.',
+    id: 'vanilla',
+    label: 'Vanilla',
+    description: 'Classic, fluffy vanilla sponge.',
   },
   {
-    id: 'deep-cocoa-noir',
-    label: 'Deep Cocoa Noir',
-    description: '70% single-origin dark chocolate with a hint of espresso.',
+    id: 'chocolate',
+    label: 'Chocolate',
+    description: 'Rich and moist chocolate cake.',
   },
   {
-    id: 'rose-vanilla',
-    label: 'Rose-Infused Vanilla',
-    description: 'Madagascar vanilla bean with organic damask rose water.',
+    id: 'chocolate-fudge',
+    label: 'Chocolate Fudge',
+    description: 'Dense, gooey chocolate fudge.',
+  },
+  {
+    id: 'caramel',
+    label: 'Caramel',
+    description: 'Sweet, buttery caramel notes infused into a soft sponge.',
+  },
+  {
+    id: 'butterscotch',
+    label: 'Butterscotch',
+    description: 'Nostalgic butterscotch flavor with delightful crunchy bits.',
+  },
+  {
+    id: 'pineapple',
+    label: 'Pineapple',
+    description: 'Fresh, tropical pineapple cake with aerated cream.',
   },
 ];
 
@@ -29,10 +44,10 @@ export const STUDIO_FINISHES = [
 ];
 
 export const DEFAULT_STUDIO_CAKE = {
-  id: 'heritage-masterpiece',
-  name: 'The Royal Peshawari',
-  price: 18500,
-  weight: '2.5KG',
+  id: 'arzish-signature',
+  name: 'Arzish Signature Cake',
+  price: 4000,
+  weight: '2 Pounds',
   image: '/images/signature-cake.png', 
-  dimensions: 'Three Tier (Serves 45-50)',
+  dimensions: 'Standard Tier (Minimum 2 Pounds)',
 };

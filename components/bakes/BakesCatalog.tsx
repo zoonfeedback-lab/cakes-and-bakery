@@ -21,7 +21,7 @@ export const BakesCatalog = ({ items, pills, sortOptions, filters }: BakesCatalo
     );
     const [activeSort, setActiveSort] = useState(sortOptions[0] ?? 'Popularity');
     const [priceCap, setPriceCap] = useState(highestPrice);
-    const [selectedSize, setSelectedSize] = useState(filters[0]?.options[1] ?? '');
+    const [selectedSize, setSelectedSize] = useState('');
     const [selectedOccasions, setSelectedOccasions] = useState<string[]>([]);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
