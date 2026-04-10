@@ -1,11 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-type HeroProps = Readonly<{
-    onOrderClick?: () => void;
-}>;
-
-export const HeroSection = ({ onOrderClick }: HeroProps) => {
+export const HeroSection = () => {
     return (
         <section className="relative w-full overflow-hidden bg-surface pt-3 pb-10 sm:pb-12 md:pt-5 md:pb-16">
             <div className="absolute inset-0">

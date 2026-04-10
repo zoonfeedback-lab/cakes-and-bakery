@@ -13,11 +13,6 @@ import {
 import { FEATURED_CAKES, GALLERY_ITEMS, JOURNEY_STEPS, TESTIMONIALS } from '@/constants/home';
 
 export default function HomePage() {
-    const handleOrderClick = useCallback(() => {
-        // TODO: Implement order flow / modal
-        console.log('Order clicked');
-    }, []);
-
     const handleViewAll = useCallback(() => {
         // TODO: Navigate to gallery page
         console.log('View all gallery clicked');
@@ -33,7 +28,7 @@ export default function HomePage() {
             <Header />
 
             <main className="flex flex-grow flex-col">
-                <HeroSection onOrderClick={handleOrderClick} />
+                <HeroSection />
                 <FeaturedCategories items={FEATURED_CAKES} />
                 <GallerySection items={GALLERY_ITEMS} onViewAll={handleViewAll} />
                 <JourneySection steps={JOURNEY_STEPS} />

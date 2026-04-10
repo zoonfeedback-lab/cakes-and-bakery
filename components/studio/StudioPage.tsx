@@ -100,7 +100,7 @@ const StudioContent = () => {
     }
 
     return { isBake: false, currentItem: DEFAULT_STUDIO_CAKE };
-  }, [cakeId, bakeId]);
+  }, [cakeId, bakeId, isBespokeType, isBoxType]);
 
   const handleSelectionChange = (category: string, id: string) => {
     setSelections((prev) => ({ ...prev, [category]: id }));
@@ -114,7 +114,10 @@ const StudioContent = () => {
     setBespokeSelections((prev) => ({ ...prev, [category]: value }));
   };
 
-  const handleBoxSelectionChange = (category: string, value: any) => {
+  const handleBoxSelectionChange = <K extends keyof typeof boxSelections>(
+    category: K,
+    value: (typeof boxSelections)[K]
+  ) => {
     setBoxSelections((prev) => ({ ...prev, [category]: value }));
   };
 
