@@ -4,19 +4,23 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
-import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
+import type { BakeProduct, CakeProduct } from '@/types';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
 
-export const ReviewPage = () => {
+type ReviewPageProps = Readonly<{
+  cakes: CakeProduct[];
+  bakes: BakeProduct[];
+}>;
+
+export const ReviewPage = ({ cakes, bakes }: ReviewPageProps) => {
   return (
     <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading Selection...</div>}>
-      <ReviewContent />
+      <ReviewContent cakes={cakes} bakes={bakes} />
     </Suspense>
   );
 };
 
-const ReviewContent = () => {
+const ReviewContent = ({ cakes, bakes }: ReviewPageProps) => {
   const searchParams = useSearchParams();
   const cakeName = searchParams.get('cake');
   const cakeId = searchParams.get('cake');
@@ -61,13 +65,13 @@ const ReviewContent = () => {
     selectedItem = {
       ...DEFAULT_STUDIO_CAKE,
       name: 'Custom Assortment Box',
-      image: '/images/royal-velvet.png' // General bakes image
+      image: '/images/daily-bakes.png'
     };
   } else if (bakeId) {
-    selectedItem = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId) || BAKES_SHOP_ITEMS[0];
+    selectedItem = bakes.find((b) => b.id === bakeId) || bakes[0] || DEFAULT_STUDIO_CAKE;
     isBake = true;
   } else {
-    selectedItem = CAKE_SHOP_ITEMS.find((c) => c.name === cakeName || c.id === cakeId) || DEFAULT_STUDIO_CAKE;
+    selectedItem = cakes.find((c) => c.name === cakeName || c.id === cakeId) || DEFAULT_STUDIO_CAKE;
   }
 
   const sponge = STUDIO_SPONGES.find((s) => s.id === spongeId) || STUDIO_SPONGES[0];

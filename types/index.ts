@@ -58,6 +58,7 @@ export interface InfoCard {
     id: string;
     title: string;
     description: string;
+    image?: string;
 }
 
 export interface FilterPill {
@@ -71,4 +72,11 @@ export interface FilterSection {
     title: string;
     options: string[];
     style?: 'radio' | 'pill';
+}
+
+export type ProductKind = 'cake' | 'bake';
+
+export interface CatalogData {
+    cakes: CakeProduct[];
+    bakes: BakeProduct[];
 }

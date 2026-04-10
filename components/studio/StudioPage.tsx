@@ -3,23 +3,27 @@
 import { useMemo, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { DEFAULT_STUDIO_CAKE, STUDIO_FILLINGS, STUDIO_FINISHES, STUDIO_SPONGES } from '@/constants/studio';
-import { CAKE_SHOP_ITEMS } from '@/constants/cakes';
-import { BAKES_SHOP_ITEMS } from '@/constants/bakes';
+import type { BakeProduct, CakeProduct } from '@/types';
 import StudioPreview from './StudioPreview';
 import StudioForm from './StudioForm';
 import BakeStudioForm from './BakeStudioForm';
 import BespokeStudioForm from './BespokeStudioForm';
 import BuildBoxStudioForm from './BuildBoxStudioForm';
 
-export const StudioPage = () => {
+type StudioPageProps = Readonly<{
+  cakes: CakeProduct[];
+  bakes: BakeProduct[];
+}>;
+
+export const StudioPage = ({ cakes, bakes }: StudioPageProps) => {
   return (
     <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading Studio...</div>}>
-      <StudioContent />
+      <StudioContent cakes={cakes} bakes={bakes} />
     </Suspense>
   );
 };
 
-const StudioContent = () => {
+const StudioContent = ({ cakes, bakes }: StudioPageProps) => {
   const searchParams = useSearchParams();
   const cakeId = searchParams.get('cake');
   const bakeId = searchParams.get('bake');
@@ -66,7 +70,7 @@ const StudioContent = () => {
         }
       };
     } else if (bakeId) {
-      const bake = BAKES_SHOP_ITEMS.find((b) => b.id === bakeId);
+      const bake = bakes.find((b) => b.id === bakeId);
       if (bake) {
         return {
           isBake: true,
@@ -83,7 +87,7 @@ const StudioContent = () => {
     }
 
     if (cakeId) {
-      const cake = CAKE_SHOP_ITEMS.find((c) => c.id === cakeId);
+      const cake = cakes.find((c) => c.id === cakeId);
       if (cake) {
         return {
           isBake: false,
@@ -100,7 +104,7 @@ const StudioContent = () => {
     }
 
     return { isBake: false, currentItem: DEFAULT_STUDIO_CAKE };
-  }, [cakeId, bakeId]);
+  }, [bakeId, bakes, cakeId, cakes, isBespokeType, isBoxType]);
 
   const handleSelectionChange = (category: string, id: string) => {
     setSelections((prev) => ({ ...prev, [category]: id }));
@@ -114,7 +118,10 @@ const StudioContent = () => {
     setBespokeSelections((prev) => ({ ...prev, [category]: value }));
   };
 
-  const handleBoxSelectionChange = (category: string, value: any) => {
+  const handleBoxSelectionChange = <K extends keyof typeof boxSelections>(
+    category: K,
+    value: (typeof boxSelections)[K]
+  ) => {
     setBoxSelections((prev) => ({ ...prev, [category]: value }));
   };
 

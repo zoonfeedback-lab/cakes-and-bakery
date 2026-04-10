@@ -1,4 +1,5 @@
 import { CakeProduct } from '@/types';
+import { slugifyLabel } from '@/lib/catalog-ui';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -26,7 +27,7 @@ export const CakeCard = ({ cake }: CakeCardProps) => {
                     Signature
                 </span>
             )}
-            {cake.category === 'wedding-cake' && (
+            {slugifyLabel(cake.category) === 'wedding-cake' && (
                  <span className="rounded-full bg-[#f1d6df] px-3 py-1 text-[10px] uppercase tracking-widest text-[#4a2b3d] shadow-lg sm:text-[11px]">
                     Artistry
                  </span>

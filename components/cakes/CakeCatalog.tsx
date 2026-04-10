@@ -1,6 +1,7 @@
 'use client';
 
 import { CakeProduct, FilterPill, FilterSection } from '@/types';
+import { slugifyLabel } from '@/lib/catalog-ui';
 import { useDeferredValue, useMemo, useState } from 'react';
 import CakeCard from './CakeCard';
 import CakeSidebar from './CakeSidebar';
@@ -21,12 +22,12 @@ export const CakeCatalog = ({
   sortOptions,
   filters,
 }: CakeCatalogProps) => {
-  const maxPrice = Math.max(...items.map((cake) => cake.price));
+  const maxPrice = items.length > 0 ? Math.max(...items.map((cake) => cake.price)) : 0;
 
   const [activePillId, setActivePillId] = useState('all');
   const [activeSort, setActiveSort] = useState(sortOptions[0]);
   const [priceCap, setPriceCap] = useState(maxPrice);
-  const [selectedSize, setSelectedSize] = useState(filters[0]?.options[1] ?? '');
+  const [selectedSize, setSelectedSize] = useState('');
   const [selectedOccasions, setSelectedOccasions] = useState<string[]>([]);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -41,7 +42,7 @@ export const CakeCatalog = ({
     return items
       .filter((cake) => {
         if (deferredPill === 'all') return true;
-        return cake.category === deferredPill;
+        return slugifyLabel(cake.category) === deferredPill;
       })
       .filter((cake) => cake.price <= deferredPriceCap)
       .filter((cake) => {
@@ -61,11 +62,11 @@ export const CakeCatalog = ({
         const leftScore =
           (left.tags?.includes('Best Seller') ? 3 : 0) +
           (left.tags?.includes('Most Loved') ? 2 : 0) +
-          (left.category === 'wedding-cake' ? 1 : 0);
+          (slugifyLabel(left.category) === 'wedding-cake' ? 1 : 0);
         const rightScore =
           (right.tags?.includes('Best Seller') ? 3 : 0) +
           (right.tags?.includes('Most Loved') ? 2 : 0) +
-          (right.category === 'wedding-cake' ? 1 : 0);
+          (slugifyLabel(right.category) === 'wedding-cake' ? 1 : 0);
 
         return rightScore - leftScore;
       });
