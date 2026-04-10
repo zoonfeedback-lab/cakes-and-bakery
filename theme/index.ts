@@ -1,9 +1,9 @@
-export const SITE_NAME = 'Central Cakes';
+export const SITE_NAME = 'Arzish Cakery';
 
 export const SITE_DESCRIPTION =
     'Craft your perfect celebration with our premium custom cakes. Artisan quality, delicious taste, and unforgettable moments since 1995.';
 
-export const SITE_URL = 'https://centralcakes.com';
+export const SITE_URL = 'https://arzishcakery.com';
 
 export const BRAND_THEME = {
     colors: {
