@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 type HeroProps = Readonly<{
     onOrderClick?: () => void;
@@ -43,15 +44,12 @@ export const HeroSection = ({ onOrderClick }: HeroProps) => {
                     </p>
 
                     <div className="flex flex-col items-center gap-3 pt-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4 sm:pt-6">
-                        <button
-                            onClick={onOrderClick}
+                        <Link
+                            href="/custom?type=bespoke"
                             className="btn-primary w-full sm:w-auto"
                         >
                             Customize Cake
-                        </button>
-                        <button className="btn-secondary w-full sm:w-auto">
-                            Explore Menu
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
