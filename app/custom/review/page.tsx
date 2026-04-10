@@ -4,7 +4,7 @@ import { ReviewPage } from '@/components/studio/ReviewPage';
 import { SITE_NAME } from '@/theme';
 
 export const metadata: Metadata = {
-  title: `Review Selection - ${SITE_NAME}`,
+  title: `Review Selection | ${SITE_NAME}`,
   description: 'Review your bespoke cake selection and proceed to secure checkout.',
 };
 

@@ -4,7 +4,7 @@ import { StudioPage } from '@/components/studio/StudioPage';
 import { SITE_NAME } from '@/theme';
 
 export const metadata: Metadata = {
-  title: `Custom Studio - ${SITE_NAME}`,
+  title: `Custom Studio | ${SITE_NAME}`,
   description: 'Design your own masterpiece in our Custom Studio.',
 };
 
