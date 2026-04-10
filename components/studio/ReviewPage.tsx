@@ -89,6 +89,14 @@ const ReviewContent = () => {
     'Box of 12': 4500,
     'Box of 24': 8500,
   };
+  const dimensionsLabel = selectedItem.dimensions ?? 'Standard Tier (Serves 12-15)';
+  const designNotesValue = isBespoke
+    ? (message ? `${message.substring(0, 20)}${message.length > 20 ? '...' : ''}` : 'No notes provided')
+    : isBox
+      ? (message || 'No note')
+      : isBake
+        ? bakeAddons
+        : dimensionsLabel;
 
   const subtotal = isBespoke ? 20000 : isBox ? boxPricingMatrix[boxSizeResolved] || 4500 : selectedItem.price;
   const calligraphyFee = isBespoke ? 0 : isBox ? 300 : isBake ? 500 : 3500;
@@ -176,7 +184,7 @@ const ReviewContent = () => {
               />
               <SelectionCard 
                 label={isBespoke ? "Design Notes" : isBox ? "Extras" : isBake ? "Extras" : "Dimensions"} 
-                value={isBespoke ? (message ? (message.substring(0, 20) + (message.length > 20 ? '...' : '')) : 'No notes provided') : isBox ? (message || 'No note') : isBake ? bakeAddons : ('dimensions' in selectedItem ? selectedItem.dimensions : 'Standard Tier (Serves 12-15)')} 
+                value={designNotesValue} 
                 icon="📝" 
               />
             </div>
