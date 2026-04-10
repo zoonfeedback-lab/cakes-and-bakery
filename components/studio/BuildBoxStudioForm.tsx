@@ -12,12 +12,11 @@ type BuildBoxStudioFormProps = Readonly<{
 }>;
 
 const BAKES_CATALOGUE = [
-  'Fudge Brownies',
-  'Nutella Stuffed Cookies',
-  'Vanilla Bean Cupcakes',
-  'Lemon Tarts',
-  'Lotus Biscoff Macarons',
-  'Classic Butter Croissants',
+  'Chocolate Brownies',
+  'Chocolate Chip Cookies',
+  'Mini Chocolate Chip Cookies',
+  'Simple Cupcakes',
+  'Customized Cupcakes',
 ];
 
 export const BuildBoxStudioForm = ({ 
@@ -66,7 +65,7 @@ export const BuildBoxStudioForm = ({
     });
   };
 
-  const boxSizes = ['Box of 6', 'Box of 12', 'Box of 24'];
+  const boxSizes = ['Box of 8', 'Box of 16', 'Box of 24'];
   const packagingStyles = ['Classic Pink Ribbon', 'Gold Foil Gift Box', 'Rustic Twine & Tag', 'Executive Black Box'];
 
   return (
