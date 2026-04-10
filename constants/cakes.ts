@@ -1,8 +1,8 @@
 import { CakeProduct, FilterPill, FilterSection } from '@/types';
 
 export const CAKE_HERO = {
-    title: 'Cakes for Every Occasion',
-    subtitle: 'Meticulously crafted with the finest ingredients and a touch of artistic flourish for your most cherished moments.',
+    title: 'Perfectly Crafted Cakes',
+    subtitle: 'Classic, custom, tiered cakes and more crafted fresh for every occasion.',
     image1: '/cake.png',
     image2: '/chocolate-cake.png',
 };
