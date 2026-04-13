@@ -1,12 +1,32 @@
 'use client';
 
 import { logoutAction } from '@/app/admin/auth-actions';
+import { useSearch } from '@/context/SearchContext';
+import { useEffect, useRef } from 'react';
 
 interface AdminHeaderProps {
     readonly onMenuClick: () => void;
 }
 
 export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
+    const { searchQuery, setSearchQuery } = useSearch();
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    // Keyboard shortcut to focus search
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === '/' && document.activeElement !== inputRef.current && 
+                !(document.activeElement instanceof HTMLInputElement) &&
+                !(document.activeElement instanceof HTMLTextAreaElement)) {
+                e.preventDefault();
+                inputRef.current?.focus();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     return (
         <header className="sticky top-0 z-40 flex h-[88px] shrink-0 items-center justify-between border-b border-brand-border/60 bg-white/70 px-4 md:px-8 backdrop-blur-2xl shadow-[0_4px_30px_rgba(109,80,96,0.03)]">
             <div className="flex items-center gap-4 flex-1">
@@ -21,10 +41,29 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                 <div className="relative w-full max-w-md group hidden sm:block">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-soft/60 group-focus-within:text-primary transition-colors">🔍</span>
                     <input 
+                        ref={inputRef}
                         type="text" 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search products, orders, customers..." 
-                        className="w-full bg-white border border-brand-border/80 shadow-sm rounded-full py-3 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-primary/50 focus:ring-4 focus:ring-primary/10 placeholder:text-text-soft/50" 
+                        className="w-full bg-white border border-brand-border/80 shadow-sm rounded-full py-3 pl-11 pr-12 text-sm outline-none transition-all duration-300 focus:border-primary/50 focus:ring-4 focus:ring-primary/10 placeholder:text-text-soft/50" 
                     />
+                    {/* Shortcut Hint / Clear Button */}
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center">
+                        {searchQuery ? (
+                            <button 
+                                onClick={() => setSearchQuery('')}
+                                className="flex h-6 w-6 items-center justify-center rounded-full bg-black/5 text-text-soft hover:bg-black/10 hover:text-foreground transition-all"
+                                aria-label="Clear search"
+                            >
+                                <span className="text-sm font-bold">×</span>
+                            </button>
+                        ) : (
+                            <kbd className="hidden lg:flex h-6 items-center gap-1 rounded border border-brand-border bg-white px-1.5 font-sans text-[10px] font-bold text-text-soft/40 shadow-sm opacity-0 group-focus-within:opacity-100 transition-opacity">
+                                <span className="text-[14px]">/</span>
+                            </kbd>
+                        )}
+                    </div>
                 </div>
             </div>
             
