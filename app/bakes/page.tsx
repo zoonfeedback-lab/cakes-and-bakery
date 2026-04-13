@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import { Footer, Header } from '@/components/layout';
 import { BakesCatalog, BakesCtaBanner, BakesShopHero } from '@/components/bakes';
-import {
-    BAKE_FILTER_PILLS,
-    BAKES_HERO,
-    BAKES_SHOP_ITEMS,
-    BAKE_SIDEBAR_FILTERS,
-    BAKE_SORT_OPTIONS,
-} from '@/constants/bakes';
+import { BAKES_HERO, BAKE_SORT_OPTIONS } from '@/constants/bakes';
+import { getCatalogData } from '@/lib/catalog';
+import { buildBakesFilterPills, buildBakesSidebarFilters } from '@/lib/catalog-ui';
 import { SITE_NAME } from '@/theme';
 
 export const metadata: Metadata = {
@@ -16,7 +12,10 @@ export const metadata: Metadata = {
         'Browse brownies, cookies, cupcakes, custom boxes, and celebration-ready baked treats from Central Cakes.',
 };
 
-export default function BakesPage() {
+export default async function BakesPage() {
+    const catalog = await getCatalogData();
+    const bakeItems = catalog.bakes;
+
     return (
         <div className="flex min-h-screen flex-col bg-surface">
             <Header />
@@ -29,10 +28,10 @@ export default function BakesPage() {
                     image2={BAKES_HERO.image2}
                 />
                 <BakesCatalog
-                    items={BAKES_SHOP_ITEMS}
-                    pills={BAKE_FILTER_PILLS}
+                    items={bakeItems}
+                    pills={buildBakesFilterPills(bakeItems)}
                     sortOptions={BAKE_SORT_OPTIONS}
-                    filters={BAKE_SIDEBAR_FILTERS}
+                    filters={buildBakesSidebarFilters(bakeItems)}
                 />
                 <BakesCtaBanner />
             </main>

@@ -9,10 +9,7 @@ type BoxSelections = {
 
 type BuildBoxStudioFormProps = Readonly<{
   selections: BoxSelections;
-  onSelectionChange: <K extends keyof BoxSelections>(
-    category: K,
-    value: BoxSelections[K]
-  ) => void;
+  onSelectionChange: <K extends keyof BoxSelections>(category: K, value: BoxSelections[K]) => void;
 }>;
 
 const BAKES_CATALOGUE = [

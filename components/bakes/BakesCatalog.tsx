@@ -1,6 +1,7 @@
 'use client';
 
 import type { BakeProduct, FilterPill, FilterSection } from '@/types';
+import { slugifyLabel } from '@/lib/catalog-ui';
 import { useDeferredValue, useState } from 'react';
 import BakesProductShowcase from './BakesProductShowcase';
 import BakesToolbar from './BakesToolbar';
@@ -15,7 +16,7 @@ type BakesCatalogProps = Readonly<{
 const INITIAL_VISIBLE_COUNT = 6;
 
 export const BakesCatalog = ({ items, pills, sortOptions, filters }: BakesCatalogProps) => {
-    const highestPrice = Math.max(...items.map((item) => item.price));
+    const highestPrice = items.length > 0 ? Math.max(...items.map((item) => item.price)) : 0;
     const [activePillId, setActivePillId] = useState(
         pills.find((pill) => pill.active)?.id ?? pills[0]?.id ?? 'all',
     );
@@ -41,7 +42,7 @@ export const BakesCatalog = ({ items, pills, sortOptions, filters }: BakesCatalo
                 return item.tags?.includes('Gift Boxes') ?? false;
             }
 
-            return item.category.toLowerCase() === deferredCategory;
+            return slugifyLabel(item.category) === deferredCategory;
         })
         .filter((item) => {
             return item.price <= deferredPriceCap;

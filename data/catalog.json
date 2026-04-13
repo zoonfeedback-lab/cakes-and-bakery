@@ -1,0 +1,242 @@
+{
+  "cakes": [
+    {
+      "id": "vanilla-classic",
+      "name": "Vanilla",
+      "category": "vanilla",
+      "price": 3000,
+      "image": "/cake.png",
+      "description": "Classic, fluffy vanilla sponge. Light, elegant, and timelessly delicious. Price is for 2 lbs (Rs. 1500/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "tags": [
+        "Classic"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 3,000"
+    },
+    {
+      "id": "chocolate-rich",
+      "name": "Chocolate",
+      "category": "chocolate",
+      "price": 3600,
+      "image": "/chocolate-cake.png",
+      "description": "Rich and moist chocolate cake layered with creamy perfection. Price is for 2 lbs (Rs. 1800/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "tags": [
+        "Popular"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 3,600"
+    },
+    {
+      "id": "chocolate-fudge",
+      "name": "Chocolate Fudge",
+      "category": "chocolate",
+      "price": 4000,
+      "image": "/chocolate-cake.png",
+      "description": "Dense, gooey Chocolate Fudge cake for the ultimate chocolate lover. Price is for 2 lbs (Rs. 2000/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "tags": [
+        "Best Seller"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 4,000"
+    },
+    {
+      "id": "caramel-delight",
+      "name": "Caramel",
+      "category": "caramel",
+      "price": 3600,
+      "image": "/pastery.png",
+      "description": "Sweet, buttery caramel notes infused into a soft sponge. Price is for 2 lbs (Rs. 1800/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 3,600"
+    },
+    {
+      "id": "butterscotch-dream",
+      "name": "Butterscotch",
+      "category": "caramel",
+      "price": 3600,
+      "image": "/cake.png",
+      "description": "Nostalgic butterscotch flavor with delightful crunchy bits. Price is for 2 lbs (Rs. 1800/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "tags": [
+        "Signature"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 3,600"
+    },
+    {
+      "id": "pineapple-fresh",
+      "name": "Pineapple",
+      "category": "fruit",
+      "price": 4000,
+      "image": "/cake.png",
+      "description": "Fresh, tropical pineapple cake with light aerated cream. Price is for 2 lbs (Rs. 2000/lb).",
+      "sizeOptions": [
+        "2 Pounds (Min)",
+        "3 Pounds",
+        "4 Pounds",
+        "5+ Pounds"
+      ],
+      "occasions": [
+        "Birthday",
+        "Anniversary",
+        "Custom Event"
+      ],
+      "dimensions": "Minimum 2 Pounds",
+      "priceLabel": "From PKR 4,000"
+    }
+  ],
+  "bakes": [
+    {
+      "id": "cupcake-simple",
+      "name": "Simple Cupcakes",
+      "category": "Cupcakes",
+      "price": 150,
+      "image": "/cupcake.png",
+      "description": "Classic, delicious cupcakes with traditional frosting styles.",
+      "occasions": [
+        "Tea Time",
+        "Kids Celebration"
+      ],
+      "tags": [
+        "Classic"
+      ],
+      "imageAlt": "Simple decorated cupcake",
+      "priceLabel": "PKR 150 each"
+    },
+    {
+      "id": "cupcake-custom",
+      "name": "Customized Cupcakes",
+      "category": "Cupcakes",
+      "price": 200,
+      "image": "/muffin.png",
+      "description": "Cupcakes tailored and decorated specifically to matching your theme.",
+      "occasions": [
+        "Gifts & Favors",
+        "Kids Celebration",
+        "Party Platter"
+      ],
+      "tags": [
+        "Custom"
+      ],
+      "imageAlt": "Customized themed cupcakes",
+      "priceLabel": "PKR 200 each"
+    },
+    {
+      "id": "brownie-choc",
+      "name": "Chocolate Brownies",
+      "category": "Brownies",
+      "price": 2800,
+      "image": "/pastery.png",
+      "description": "Traditional rich 2x2 inch chocolate brownies. Sold in boxes. (Minimum Order: 8 pieces, Rs. 350 per brownie).",
+      "boxOptions": [
+        "Box of 8 (PKR 2,800)",
+        "Box of 16 (PKR 5,600)",
+        "Box of 24 (PKR 8,400)"
+      ],
+      "occasions": [
+        "Tea Time",
+        "Gifts & Favors",
+        "Party Platter"
+      ],
+      "tags": [
+        "Best Seller"
+      ],
+      "imageAlt": "Box of rich chocolate brownies",
+      "priceLabel": "PKR 2,800 (Box of 8)"
+    },
+    {
+      "id": "cookie-choc-chip",
+      "name": "Chocolate Chip Cookies",
+      "category": "Cookies",
+      "price": 3600,
+      "image": "/buiscuts.png",
+      "description": "Classic, chunky chocolate chip cookies. (Minimum Order: 12 pieces, Rs. 300 each).",
+      "boxOptions": [
+        "Box of 12 (PKR 3,600)",
+        "Box of 24 (PKR 7,200)"
+      ],
+      "occasions": [
+        "Tea Time",
+        "Kids Celebration",
+        "Party Platter"
+      ],
+      "tags": [
+        "Classic"
+      ],
+      "imageAlt": "Fresh chocolate chip cookies",
+      "priceLabel": "PKR 3,600 (Box of 12)"
+    },
+    {
+      "id": "cookie-mini",
+      "name": "Mini Chocolate Chip Cookies",
+      "category": "Cookies",
+      "price": 1800,
+      "image": "/biscuit.png",
+      "description": "Bite-sized mini chocolate chip cookies packaged in a convenient 500g bag.",
+      "boxOptions": [
+        "500g Bag (PKR 1,800)",
+        "1kg Bag (PKR 3,600)"
+      ],
+      "occasions": [
+        "Tea Time",
+        "Gifts & Favors"
+      ],
+      "imageAlt": "Mini chocolate chip cookies in a bag",
+      "priceLabel": "PKR 1,800 (500g)"
+    }
+  ]
+}

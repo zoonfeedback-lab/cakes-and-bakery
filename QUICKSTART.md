@@ -68,7 +68,16 @@ app/                 → Next.js pages & layout
 - Define types in `types/index.ts`
 - Pass to component via props
 
+### Admin Dashboard Access
+
+To access the admin panel at `/admin`, you must configure environment variables:
+
+
+
+3. Restart the development server for changes to take effect.
+
 ### Run Linting
+
 
 ```bash
 npm run lint
