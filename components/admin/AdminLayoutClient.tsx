@@ -5,11 +5,14 @@ import { AdminSidebar } from './AdminSidebar';
 import { AdminHeader } from './AdminHeader';
 import { FloatingActionButton } from './FloatingActionButton';
 
+import { SearchProvider } from '@/context/SearchContext';
+
 export function AdminLayoutClient({ children }: { children: React.ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="flex h-[100dvh] overflow-hidden bg-[#Fdfaf7] font-sans relative">
+        <SearchProvider>
+            <div className="flex h-[100dvh] overflow-hidden bg-[#Fdfaf7] font-sans relative">
             <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             
             <div className="flex flex-1 flex-col overflow-x-hidden relative w-full">
@@ -20,5 +23,6 @@ export function AdminLayoutClient({ children }: { children: React.ReactNode }) {
                 <FloatingActionButton />
             </div>
         </div>
+    </SearchProvider>
     );
 }

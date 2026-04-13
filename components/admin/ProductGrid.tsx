@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { BakeProduct, CakeProduct, ProductKind } from '@/types';
 import { ProductCard } from './ProductCard';
 import { ProductFormModal } from './ProductFormModal';
+import { useSearch } from '@/context/SearchContext';
 
 interface ProductGridProps {
     readonly kind: ProductKind;
@@ -11,6 +12,7 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ kind, items }: ProductGridProps) {
+    const { searchQuery: globalSearchQuery } = useSearch();
     const [editingItem, setEditingItem] = useState<CakeProduct | BakeProduct | null>(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,11 +27,12 @@ export function ProductGrid({ kind, items }: ProductGridProps) {
 
     // Filtered items
     const filteredItems = items.filter((item) => {
+        const effectiveQuery = (searchQuery || globalSearchQuery).toLowerCase();
         const matchesSearch =
-            !searchQuery ||
-            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.category.toLowerCase().includes(searchQuery.toLowerCase());
+            !effectiveQuery ||
+            item.name.toLowerCase().includes(effectiveQuery) ||
+            item.description.toLowerCase().includes(effectiveQuery) ||
+            item.category.toLowerCase().includes(effectiveQuery);
         const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
         return matchesSearch && matchesCategory;
     });
