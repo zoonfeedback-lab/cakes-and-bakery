@@ -125,20 +125,40 @@ export async function getCatalogData(): Promise<CatalogData> {
     };
 }
 
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure cloudinary with env variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 async function saveUploadedImage(kind: ProductKind, file: File) {
     if (!file || file.size === 0) {
         return null;
     }
 
-    const safeExtension = path.extname(file.name) || '.png';
-    const fileName = `${kind}-${Date.now()}-${slugifyLabel(path.basename(file.name, safeExtension))}${safeExtension}`;
-    const filePath = path.join(UPLOADS_DIRECTORY, fileName);
-    const buffer = Buffer.from(await file.arrayBuffer());
+    // Convert file to base64 Data URI
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const mime = file.type || 'image/png';
+    const base64Data = buffer.toString('base64');
+    const fileUri = `data:${mime};base64,${base64Data}`;
 
-    await fs.mkdir(UPLOADS_DIRECTORY, { recursive: true });
-    await fs.writeFile(filePath, buffer);
-
-    return `/uploads/${fileName}`;
+    try {
+        // Upload to Cloudinary
+        const result = await cloudinary.uploader.upload(fileUri, {
+            folder: `cakes-and-bakes/${kind}`,
+            resource_type: 'image',
+        });
+        
+        // Return the secure URL provided by Cloudinary
+        return result.secure_url;
+    } catch (error) {
+        console.error('Cloudinary upload error:', error);
+        return null;
+    }
 }
 
 type UpsertPayload = Omit<CakeProduct, 'id'> & {

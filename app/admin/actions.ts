@@ -1,9 +1,18 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { refresh } from 'next/cache';
 import { deleteCatalogItem, upsertCatalogItem } from '@/lib/catalog';
 import type { ProductKind } from '@/types';
+import { cookies } from 'next/headers';
+
+async function assertAdmin() {
+    const cookieStore = await cookies();
+    if (cookieStore.get('admin_session')?.value !== 'authenticated_admin') {
+        throw new Error('Unauthorized access');
+    }
+}
+
 
 function toStringValue(value: FormDataEntryValue | null) {
     return typeof value === 'string' ? value.trim() : '';
@@ -30,6 +39,7 @@ function revalidateCatalogPages() {
 }
 
 export async function saveProductAction(formData: FormData) {
+    await assertAdmin();
     const kind = toStringValue(formData.get('kind')) as ProductKind;
     const imageFileEntry = formData.get('imageFile');
     const imageFile = imageFileEntry instanceof File ? imageFileEntry : undefined;
@@ -55,10 +65,11 @@ export async function saveProductAction(formData: FormData) {
     );
 
     revalidateCatalogPages();
-    redirect('/admin');
+    refresh();
 }
 
 export async function deleteProductAction(formData: FormData) {
+    await assertAdmin();
     const kind = toStringValue(formData.get('kind')) as ProductKind;
     const id = toStringValue(formData.get('id'));
 
@@ -67,5 +78,5 @@ export async function deleteProductAction(formData: FormData) {
         revalidateCatalogPages();
     }
 
-    redirect('/admin');
+    refresh();
 }
