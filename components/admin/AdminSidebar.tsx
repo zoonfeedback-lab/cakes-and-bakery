@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface AdminSidebarProps {
     readonly isOpen: boolean;
@@ -10,17 +11,68 @@ interface AdminSidebarProps {
 
 export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
     const pathname = usePathname();
+    const [activeSection, setActiveSection] = useState<string>('');
     
     const links = [
-        { name: 'Dashboard', href: '/admin', icon: '📊' },
-        { name: 'Cakes', href: '#cakes-section', icon: '🎂' },
-        { name: 'Bakes', href: '#bakes-section', icon: '🧁' },
-        { name: 'Orders', href: '/admin/orders', icon: '🛍️' },
-        { name: 'Customers', href: '/admin/customers', icon: '👥' },
-        { name: 'Analytics', href: '/admin/analytics', icon: '📈' },
-        { name: 'Custom Orders', href: '/admin/custom-orders', icon: '✨' },
-        { name: 'Settings', href: '/admin/settings', icon: '⚙️' },
+        { name: 'Dashboard', href: '/admin', id: 'overview', icon: '📊' },
+        { name: 'Cakes', href: '#cakes-section', id: 'cakes-section', icon: '🎂' },
+        { name: 'Bakes', href: '#bakes-section', id: 'bakes-section', icon: '🧁' },
+        { name: 'Orders', href: '/admin/orders', id: 'orders', icon: '🛍️' },
+        { name: 'Customers', href: '/admin/customers', id: 'customers', icon: '👥' },
+        { name: 'Analytics', href: '/admin/analytics', id: 'analytics', icon: '📈' },
+        { name: 'Custom Orders', href: '/admin/custom-orders', id: 'custom-orders', icon: '✨' },
+        { name: 'Settings', href: '/admin/settings', id: 'settings', icon: '⚙️' },
     ];
+
+    useEffect(() => {
+        if (pathname !== '/admin') return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-100px 0px -40% 0px',
+            threshold: 0,
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        
+        // Sections to observe
+        const sections = ['cakes-section', 'bakes-section'];
+        sections.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) observer.observe(element);
+        });
+
+        // Set initial state based on scroll position or hash
+        const currentHash = window.location.hash.replace('#', '');
+        if (currentHash) {
+            setActiveSection(currentHash);
+        } else if (window.scrollY < 200) {
+            setActiveSection('overview');
+        }
+
+        return () => observer.disconnect();
+    }, [pathname]);
+
+    const isLinkActive = (link: typeof links[0]) => {
+        if (pathname !== '/admin') {
+            return pathname === link.href;
+        }
+        
+        // Special case for dashboard overview
+        if (link.id === 'overview') {
+            return activeSection === 'overview' || !['cakes-section', 'bakes-section'].includes(activeSection);
+        }
+
+        return activeSection === link.id;
+    };
 
     return (
         <>
@@ -47,16 +99,21 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                 <nav className="flex-1 overflow-y-auto py-8 px-4 space-y-1.5 custom-scrollbar">
                     <p className="px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-text-soft/60 mb-4">Core Management</p>
                     {links.slice(0,3).map(link => {
-                        const isStrictlyActive = pathname === link.href && !link.href.includes('#') || (pathname === '/admin' && link.name === 'Dashboard');
+                        const isActive = isLinkActive(link);
                         
                         return (
                             <Link 
                                 key={link.name} 
                                 href={link.href}
-                                onClick={onClose}
-                                className={`group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${isStrictlyActive ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-[inset_2px_0_0_#967386]' : 'text-text-soft hover:bg-black/[0.03] hover:text-foreground'}`}
+                                onClick={(e) => {
+                                    if (link.href.startsWith('#')) {
+                                        setActiveSection(link.id);
+                                    }
+                                    onClose();
+                                }}
+                                className={`group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${isActive ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-[inset_2px_0_0_#967386]' : 'text-text-soft hover:bg-black/[0.03] hover:text-foreground'}`}
                             >
-                                <span className={`text-lg transition-transform duration-300 ${isStrictlyActive ? 'scale-110' : 'group-hover:scale-110'}`}>{link.icon}</span>
+                                <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>{link.icon}</span>
                                 <span className="tracking-wide">{link.name}</span>
                             </Link>
                         );
@@ -64,14 +121,15 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
 
                     <p className="px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-text-soft/60 mt-8 mb-4">Business</p>
                     {links.slice(3, 7).map(link => {
+                        const isActive = isLinkActive(link);
                         return (
                             <Link 
                                 key={link.name} 
                                 href={link.href}
                                 onClick={onClose}
-                                className="group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-text-soft hover:bg-black/[0.03] hover:text-foreground transition-all duration-300"
+                                className={`group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${isActive ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-[inset_2px_0_0_#967386]' : 'text-text-soft hover:bg-black/[0.03] hover:text-foreground'}`}
                             >
-                                <span className="text-lg transition-transform duration-300 group-hover:scale-110">{link.icon}</span>
+                                <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>{link.icon}</span>
                                 <span className="tracking-wide">{link.name}</span>
                             </Link>
                         );
@@ -79,14 +137,15 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
 
                     <p className="px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-text-soft/60 mt-8 mb-4">System</p>
                     {links.slice(7).map(link => {
+                        const isActive = isLinkActive(link);
                         return (
                             <Link 
                                 key={link.name} 
                                 href={link.href}
                                 onClick={onClose}
-                                className="group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-text-soft hover:bg-black/[0.03] hover:text-foreground transition-all duration-300"
+                                className={`group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${isActive ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-[inset_2px_0_0_#967386]' : 'text-text-soft hover:bg-black/[0.03] hover:text-foreground'}`}
                             >
-                                <span className="text-lg transition-transform duration-300 group-hover:scale-110">{link.icon}</span>
+                                <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>{link.icon}</span>
                                 <span className="tracking-wide">{link.name}</span>
                             </Link>
                         );
