@@ -35,7 +35,7 @@ export function ProductGrid({ kind, items }: ProductGridProps) {
     });
 
     return (
-        <section className="space-y-6">
+        <section id={`${kind}s-section`} className="space-y-6">
             {/* Section Header */}
             <div className="group relative flex flex-col gap-4 overflow-hidden rounded-[2rem] border border-brand-border bg-white p-6 shadow-[0_8px_30px_rgba(109,80,96,0.03)] sm:flex-row sm:items-center sm:justify-between transition-all hover:shadow-[0_10px_40px_rgba(109,80,96,0.06)]">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
