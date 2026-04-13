@@ -72,13 +72,7 @@ app/                 → Next.js pages & layout
 
 To access the admin panel at `/admin`, you must configure environment variables:
 
-1. Create a `.env` file in the root directory (if it doesn't exist).
-2. Add the following credentials:
 
-```env
-ADMIN_EMAIL=admin@arzishcakery.com
-ADMIN_PASSWORD=BakeryAdmin2026
-```
 
 3. Restart the development server for changes to take effect.
 
