@@ -7,6 +7,12 @@ export const metadata: Metadata = {
     description: 'Manage your high-end artisan catalog and orders efficiently.',
 };
 
+import { SearchProvider } from '@/context/SearchContext';
+
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
-    return <AdminLayoutClient>{children}</AdminLayoutClient>;
+    return (
+        <SearchProvider>
+            <AdminLayoutClient>{children}</AdminLayoutClient>
+        </SearchProvider>
+    );
 }
